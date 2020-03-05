@@ -5,12 +5,44 @@
 ### Clean code
 
 #### Point out 5 suggestions, how to format an SQL query!
+ - <b>Naming: </b>carefully chosen names for both tables and columns are very helpful.
+>  - avoid keywords
+>  - avoid abbreviations
+>  - avoid very long names, or at least connect them with underscore
+  - <b>Indentation and alignment: </b> properly indented queries are much easier to read.
+>  - new line for keywords on the left side
+>  - query parameters indented to create a block like body
+>  - commas are at the end of the line
+
 #### What layers can you name in a simple web application?
+Layered architecture is a client–server architecture
+> - presentation
+> - application processing
+> - data management functions<br>
+
+<b>layer</b> and <b>tier</b>: layer is a logical-, tier is a physical structuring.
 
 ### Error handling
 #### What error can occur, when an array does not have an element on the requested index?
+index error
 #### What is the “finally” block, and how would you use it?
+Finally block is a block that is used to execute important code. E.g.: closing connection. <br>
+Finally block is always executed whether exception is handled or not. <br>
+Finally block follows try or catch block.
+
 #### Why should we catch special exception types?
+In general, an exception breaks the normal flow of execution and executes a pre-registered exception handler.
+
+To point to using an exception handler is to keep running the code in cases which are "minor" problems from a view <br>
+of the program:
+> - to avoid a bad input that can broke the consistency of the code
+> - to avoid an index error with limiting the steps for the user
+
+Or to prevent some mayor problem. For example: important sequences should properly given for the program.
+> - misspelling or
+> - harmful injections
+
+can be handled with exception in the case that the code can not accept just the right one.
 
 ### Security
 #### What is SQL injection? How to protect an application against it?
@@ -29,6 +61,14 @@
 ### Algorithms
 
 #### What is the difference between Stack and Queue data structure?
+Stack data structure have just one pointer, adding operation (push) or removing operation (pop) take place from the <br>
+top of the list, where the pointer is.
+Principle: LIFO (Last In First Out)
+
+Queue have two pointers. One of each side of the list. The front side can take a new operation (enqueue), <br> 
+to remove (dequeue) an operation the pointer should use the other side, the rear.
+Principle: FIFO (First In First Out) 
+
 #### What is BubbleSort? Describe the main logic of this sorting algorithm.
 #### Explain the process of finding the maximum and minimum value in a list of numbers!
 #### Explain the process of calculating the average value in an array of numbers!
