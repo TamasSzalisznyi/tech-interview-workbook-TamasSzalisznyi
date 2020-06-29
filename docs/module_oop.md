@@ -5,95 +5,105 @@
 ### Error handling
 
 #### What does 'fail fast' mean in terms of exception handling? Why is it a good practice?
-    1. A code when tries to fail as soon as possible at variable or object initialization. 
-    In object-oriented programming, a fail-fast-designed object initializes the internal state of the object in the constructor, 
-    launching an exception if something is wrong (vs allowing non-initialized or partially initialized objects that will fail later due to a wrong "setter"). 
-    The object can then be made immutable if no more changes to the internal state are expected. 
-    In functions, fail-fast code will check input parameters in the precondition. 
-    In client-server architectures, fail-fast will check the client request just upon arrival, before processing or redirecting it to other internal components, returning an error if the request fails (incorrect parameters, ...). 
-    2. Fail-fast-designed code decreases the internal software entropy, and reduces debugging effort.
-    Fail-fast components are often used in situations where failure in one component might not be visible until it leads to failure in another component.
-    A fail-fast system that is designed to halt as well as report the error on failure is less likely to erroneously perform an irreversible or costly operation.
-
+    Fail fast is a programming design; a code tries to fail as soon as possible at variable or object initialization. 
+    
+    When exception occur it is not handled silently or with default values 
+    because there is a chance then that the error will show up later when harder to trace back.
+    
+    It should decreases the internal software entropy, and reduces debugging effort.
+    
 ## Computer Science
 
 ### Data structures
 
 #### How to find the middle element of singly linked list in O(n)?
-    O(n) = LinkedList.size() / 2.
-    if we know the size of the linked list (e.g.: the number of elements it holding) then we should step (iterate) size / 2 times.
-    other approach should be using two pointer: one slower pointer who step one, and a faster pointer who step two. If the faster pointer reach the last element, the slower one should be on the middle.
+    n = number of elements / 2.
+    If we know the size of the linked list (e.g.: the number of elements it holding) then we should step (iterate) size / 2 times.
+    Other approach should be using two pointer: one slower pointer who step one, and a faster pointer who step two. 
+    If the faster pointer reach the last element, the slower one should be on the middle.
     
 #### Given an array of integers going from 1 to 100 (both inclusive) there is a duplicated entry. How to find it?
-    Converting the array to a set should eliminate the duplicates.
+    Store the first element in a temporary variable then iterating over the array, if there is no match, 
+    begin the process with the second element and so on till an equality comparison return true.
     
 #### What is a linked list? How to find if a linked list has a loop?
-    Linked list is collection where the elements have at least two, at most three field. 
-    One of those are the field what contains actually the data, the second containing the pointer to the next element, 
-    and if it a double linked list the third field point to the previous element.
-    So these fields together building a node, the list what builded up from nodes is the linked list.
-    If the linked list last node has the pointer to the first node, not just null, it's acting like a ring. or loop.
+   	Linked list is a data structure which hold the values in a field and a pointer to the next element 
+   	(and optionally a pointer to the previous).
+   	Floyds cycle say: 
+   	starting with two pointers, one is faster than the other, if they met, there is a loop in the list.
     
 #### What is the Big O time complexity of the common operations in an ArrayList, LinkedList, HashMap? And of a bubble sort, quicksort, finding items in a Binary Search tree?
-    Big O can be O(1) which is constant time needed to perform the operation.
-    O(n) where is the n are the steps what needed to be done to perform the operation.
-    // TODO: O(log(n)) if the -- 
+    ArrayList: get O(1), search O(n), insert O(n), delete O(n)
+    LinkedList: get O(n), search O(n), insert O(1), delete O(1) (without search) 
+    HashMap: average case: O(log n), worst case: O(n)
+     
+    As I understand: HashMap values stored in a LinkedList until the elements are less then 8, after that become a binary search tree.
+     
+    Average time:
+    - bubble sort: O(n^2)
+    - quick sort: O(n log(n))
+    - binary search tree: O(log n)
     
 #### How does HashMap work?
-    It's mixture from an array and a linked list. The keys are hashed, stored in the array, and the value stored in the linked list.
-    As I understand: the array containing keys like an index to help retrive the value from the linked list easier than the two 
-    can on it's own.
-
+    It's mixture from an array and a linked list. 
+    The keys are hashed, stored in the array, and the value stored in the linked list, in buckets, in the same order as the array containing them.
+    To get the value from the linked list we know where is it exactly from the index of the array.
+    
 #### Why is it important for keys in a map to have an immutable type? (Consider String for example.)
-    To avoid collision.
+    Because to find an element we need the hash code of the key and it must not change at time.
     
 ### Other
 
 #### What is a garbage collector, in a nutshell?
     The garbage collector is an autamated subroutine to free up space from the heap memory. It's designed to remove entries
     what are doesn't have pointer assigned to any variable.
+    (Algorithms inspect the memory from time to time for dead, weak or other reference
+    traces and recycling the memory allocated or let them as they are)
     
 ## Programming paradigms
 
 ### Procedural
 
 #### What is casting? What is the difference between up vs downcasting?
-    Upcasting can be implicit, cast the object to it's supertype. (e.g.: int to float)
-    Downcasting is possible to sub classes in the object hiearchy and explicit because of the 
+    Casting is changing the type of a data.	
+    
+    Upcasting cast the object to it's supertype. (e.g.: int to float)
+    Downcasting is possible to cast the object to it's sub class in the object hiearchy and explicit because of the 
     possible data losing by primitive types. (e.g.: from double to int)
      
 #### Which order should we catch the exceptions? Why?
-    We should cath the most common exceptions with the Exception class, which is used as a common exception pool.
-    If we know what exception can occur during the code lifetime, we should precisely catch that exception with the 
+    We should cath most precise exception becaus exception can be from
     many different exception classes. (e.g.: ArrayIndexOutOfBoundsException, NullPointerException...)
-    The order matters because there are runtime exceptions, IOexceptions and errors.
-    Different exceptions needed handle different ways.
+    
+    Different exceptions needed to handle in different ways and this is easier with specifik exception and easier to debug.
 
 ### Object-oriented
 
 #### What is a class?
-    Classes are blueprints or templates for objects. 
-    We use them to describe types of entities, 
-    define the properties and operations for the object.
+    Encapsulated form of a bunch of data.
+    Classes are blueprints for objects. 
+    We use them to hold and define the attributes for the object and/or for itself if it static. 
     
 #### What is an object?
-    An object is an entity which can have fields and/or methods.
-    But also object also the base class for every entity, IS-A superclass
-    for every object which is created by us.
+    Object is an entity with atributes, created with the new keyword from a class constructor.
      
 #### What is a constructor?
-    A constructor is a special type of subroutine called to create an object. 
-    It prepares the new object for use, often accepting arguments that the constructor uses to set required member variables.
+    A constructor is a special type of method called with new keyword in order to create an object.
     
 #### Do we require parameter for constructors?
-    A signature can have zero or more parameter.
+    A constructor can have zero or more parameter, even can be overloaded.
     
 #### What is an interface?
+    Is a model for data hiding in OO, the outer scope can access an object attributes with through the interface(s) methods, 
+    which is(are) implemented by the class.
     In its most common form, an interface is a group of related methods with empty bodies. (JavaDoc)
-    As I understand: interface is a common "entry point" for different classes which are implementing the interface, so
-    the exceptor can handle all the different classes through one interface.
     
+    As I understand: interface is a common "entry point" for different classes which are implementing the interface, so
+    the invoker can handle all the different classes through one interface.
+
 #### What are access modifiers?
+	They let the programmer to decide how the classes and objects are abstracted to the outer scope.
+
     - private: access level is only within the class. It cannot be accessed from outside the class.
     - package-private (default) : access level is only within the package. It cannot be accessed from outside the package.
     - protected: access level is within the package and outside the package through child class. Without a child class, it cannot be accessed from outside the package.
@@ -105,134 +115,137 @@
     Data hiding ensures exclusive data access to class members and protects object integrity by preventing unintended or intended changes
         
 #### Can a static method use non-static members?
-    Static methods access non-static methods passing the object reference as parameter.
-    Static class method can access an object method or variable through the object,
-    if it's instance and reference already presence.     
+    Static methods access non-static member through the object reference as parameter.
     
 #### What is the difference between hiding a static method and overriding an instance method?
-    Overriding basically supports late binding. Therefore, it's decided at run time which method will be called. 
-    It is for non-static methods.
-    Hiding is for all other members (static methods, instance members, static members). 
-    It is based on the early binding. More clearly, the method or member to be called or used is decided during compile time.
-    
+    Static methods can not be overriden, they are initalized during compile time, 
+    they are not polymorh but they can be hided with an another static method.
+    Instance methods are late-binded, because of the polymorphism they can be overriden with an another 
+    instance method during run-time.
+
 #### Define the following terms: Instantiation, Attribute, Method:
-    Instantiate in Java means to call a constructor of a Class which creates an an instance or object, 
-    of the type of that Class. 
-    Instantiation allocates the initial memory for the object and returns a reference.
+    Instantiate in Java means to call a constructor of a Class which creates an instance or object, 
+    of the type of that class and returns a reference.
     
-    Objects are instances of classes, so think in terms of classes, attributes and operations.
-    Attributes are fields or properties of the class.
+    Attributes are fields and properties of the class and of the object.
     
-    Operations are logic exposed as methods. 
-    
-    A Java method is a collection of statements that are grouped together to perform an operation. 
+    Method is a collection of statements that are grouped together to perform a logical operation. 
     with or without return values.
 
 #### Could we access a static variable (or method) from a non-static method? Why?
-    Yes, because static fields and methods are belonging to the class.
-    Class members don't need any instance to be invoked. 
+    Yes, because static fields and methods are belonging to the class and classes are initaized at compile time, 
+    also class members don't need any instance to be invoked. 
     
 #### Could we access a non-static variable (or method) from a static method? Why?
     Non-static fields or methods are object members, 
-    we can access them: calling the object with the object reference name. 
+    we can access them: calling the object with the object reference. 
  
 #### How many instances you have of a static variable of a given class?
     One. Everything else is a copy of that.
     
 #### Why is it not a good practice to write a lot of static methods?
-    They aren't fit so in the OO principles.(they more procedural)
-    Inheritance and modularity changing.
+    They aren't fit so in the OO principles (they more procedural):
+    - polymorphism not happening
+    - abstraction not happening as static classes can not implement interfaces, interfaces can not hav static method
     
 #### What are the features of static attributes and static methods of a class? What are the benefits, when to use them?
-    They can be reached without an object instance beacause they belong to the class not to the instance.
+    They can be reached without an object instance because they belong to the class not to the instance.
     Instances of that class sharing the same static field/method.
+    Static methods in Java are resolved at compile time. 
+    Since method overriding is part of Runtime Polymorphism, so static methods can't be overridden.
+    Abstract methods can't be static.
+    Static methods cannot use this or super keywords.
+   
+    Instance methods can directly access both instance methods and instance variables.
+    Instance methods can also access static variables and static methods directly.
+    Static methods can access all static variables and other static methods.
+    Static methods cannot access instance variables and instance methods directly; they need some object reference to do so.
+    
     I am using them if I want a field to be shared amongs the instances.
     Using static mathod should be good if they don't do anything else like a single computation depends from the
-    parameters, like utility or helper functions.
-    Pure functionality e.g.: Math class or String.format() or Arrays.asList() method.
+    parameters, like utility or helper functions e.g.: Math class or String.format() or Arrays.asList() method.
 
 #### What is the ‘this’ reference?
-    The reference to the current instance where 'this' is called.
+    The reference to the current instance to itself or an attribute of it, where 'this' is called.
     
 #### What are base class, subclass and superclass?
     Object class is a base class (or superclass) for every other classes.
     Every other class can have at most one more superclass and can have zero or more subclass.
-    super- and subclasses made an inheritance hierarchy, 
-    subclasses inherit the members fom the superclass allowed by the superclass. 
+    Super- and subclasses made an inheritance hierarchy, 
+    Subclasses inherit the members fom the superclass allowed by the superclass. 
 
 #### Draw an object oriented family (as entities, with relations) on the whiteboard.
+
 #### Difference between overloading and overriding?
-     Overloaded methods are in the same class, suppossed to act in the same way, just let the compiler
-	 choose from the given parameters which is fit to one of the methods.
-	Overriding let one method to be called instead of an inherited method with the same name.
+     Overloaded methods are in the same class, differ in parameters.
+     Overriding is when an instance method will be called instead of another method with the same name but in another class(or super class).
 
 #### What are the Object Oriented Principles? Explain the concepts with realistic examples!
 
+    OOP:
+    
     S – Single Responsibility Principle (SRP)
+        one method doing one job.
     O – Open Closed Principle (OCP)
+        polymorphism and abstraction to build new functionality.
     L – Liskov Substitution Principle (LSP)
+        inherited classes can be usd without modification
     I – Interface Segregation Principle (ISP)
+        interfaces should be client specific
     D – Dependency Inversion Principle (DIP)
+        is a form of decoupling software modules
 
-	The four principles of object-oriented programming are encapsulation, abstraction,	inheritance, and polymorphism. 
+    Java:
+    
+	- encapsulation,
+	- abstraction,
+	- inheritance,
+	- polymorphism. 
 
-    Abstraction : Abstraction is the process of showing only essential/necessary 
-	features of an entity/object to the outside world 
-	and hide the other irrelevant information. 
+    Abstraction: showing only essential/necessary features of an entity/object to the outside world 
+	and hide the other information. 
 	-> getters, setters for private fields
-
-    Encapsulation : Encapsulation means wrapping up data and member function 
-	(Method) together into a single unit i.e. class. 
-	Encapsulation automatically achieve the concept of data hiding 
-	providing security to data by making the variable as private and expose 
-	the property to access the private data which would be public.
+	
+    Encapsulation: setting up a member data and method together into a single unit i.e. class. 
 	-> class, package	
 	    
-	Inheritance : The ability of creating a new class from an existing class. 
-	Inheritance is when an object acquires the property of another object. 
-	Inheritance allows a class (subclass) to acquire the properties and 
-	behavior of another class (super-class). 
+	Inheritance: the ability of creating a new class from an existing class, acquiring it's attributes and behavior. 	 
 	It helps to reuse, customize and enhance the existing code.
-	So it helps to write a code accurately and reduce the development time.
     -> extend, implement
 
-	Polymorphism: Polymorphism is derived from 2 Greek words: poly and morphs. 
-	The word "poly" means many and "morphs" means forms. 
-	So polymorphism means "many forms". 
-	A subclass can define its own unique behavior and still 
-	share the same functionalities or behavior of its parent/base class. 
-	A subclass can have their own behavior and share some of its behavior 
-	from its parent class not the other way around. 
-	A parent class cannot have the behavior of its subclass.
+	Polymorphism: means "many forms". 
+	A subclass can define its own unique behavior and still	share functionalities and behavior of its parent class,
+	but also it can have it's own behavior.
 	-> overloading, interface
 
 #### What is method overloading?
-    Overloading is a class member set from instance methods or constructors with same name 
-    but difference in parameter type and number.
+    Overloading is when an instance have a set method or constructor with same signature just difference
+    in parameter type and number.
     The compiler will execute the one wich fit to the given parameter.
     So the method and/or constructor can be called with different parameters.
-    
      
 #### What is method overriding?
-    Overriding is explicit, with annotation in the subclass on the method which have the same name from the superclass.
-    The compiler will execute the one annotated one with matching type from caller site.
+    Overriding is explicit annotated.
+    If also super class and subclass have a mthod with same name,
+    the compiler will execute the one where from the invoking come this is overriding.
     
 #### Explain how object oriented languages attempt to simplify memory management for Programmers.
 	Some of the languages provide an automatic garbage-managment.
-	(Algorithms inspect the memory from time to time for dead, weak or other reference
-	traces and recycling the memory allocated or let them as they are)
 	Java and C# are garbage-collected.
+	Stack, heap meta memory space also avaliable.
+	ArrayLst, HashMap capacity automated.
+	Interfaces and provided classes implemented by "java" also efficient in the way they using resources.
 
 #### Explain the “Single Responsibility” principle!
-	A single function per class, also encapsulated in a class, module or function.
+	One method should be responsible for one purpose. For one logical step or one job.
+	E.g.: one class created to give us a connection.
+	The methods are responsible to make that connection step by step, each doing their part.
 
 #### What is an object oriented program? Explain, show.
 	As following OO principles, the program should contain one or several
 	encapsulated objects with fields to store data and procedures to access and/or
 	modify those fields.
 	These object then interact with each other and/or with the user.
-
-	 
 	
 #### How do you make a class immutable? What do you need to watch out for?
     Declare the class as final so it can’t be extended.
@@ -262,28 +275,34 @@
     I would use int. Maybe short.
     
 #### What is the "golden rule" of variable scoping in Java? What is the lifetime of variables?
+    Static variables accessible from anywhere and their lifetime last as long the application running, 
+    whereas instance variables are accessible through the reference of that instance, and their lifetime span
+    from invoking them till they have refrence somewhere.
+    Inline or method varibles lifetime last till the enclosing brackets.
     
 #### What is the purpose of the ‘equals()’ method?
-    To find out two objects are the same, as they resident in the same location, 
-    or two objects are the same in values which they holding. ( data, attributes, fields, methods...)
+    To find out that two objects value are the same.
     
 #### What is the difference between '==' and 'equals()'?
-    '==' can be used to comparing to primitive types, but it return with memory address from objects therefore 
-    'equals' used to comparing objects with the original form or with overriden own method.
+    '==' can be used to comparing to primitive types, or comparing to objects memory location.
+    'equals' used to comparing objects values.
     
 #### What does the ‘static’ keyword mean?
-    The keyword make static the 'annotated' class, method, block or variable. They can not be instantiated nor belong
-    to object, they belong to the class and they allocated in memory during compile time and a copy of them are used in future.
+    The keyword make static the 'annotated' class, method, block or variable and they are initalzed at compile time. 
+    They can not be instantiated because they do not belong to an object, but they belong to the class and a copy of them are used in future.
     
 #### Why is the main() method declared as static? Explain.
-    The entry point must not belong to an object because it's not exist yet. 
-    The complier can step in the application thrugh this method.
+    As entry point, the JVM looking up for that exact method to start an application.
+    Also must not belong to an object because objects created later and stored elsewhere. 
     
 #### What is the default access modifier in a class?
     Packege-private.
     
 #### What is the JVM?
-    The Java Virtual Machine.
+    The Java Virtual Machine is a virtual machine that enables a computer to run Java programs 
+    as well as programs written in other languages that are also compiled to Java bytecode. 
+    This is the feature which let the write one, run anywhere motto to come true, 
+    so the platform independency of java come from JVM.
     
 #### What is the difference between the JRE and the JDK?
     Java Runtime Enviroment responsible to run applications in java enviroment, 
@@ -304,11 +323,11 @@
     Public or default, package-private.
     
 #### Can an “enum” contain methods in Java? Explain.
-    Enum is a special class, but class. And as a class can hold methods as well.
+    Enum is a special class, but class. And as a class can hold methods as well. E.g.: enum have also constructor.
     
 #### When would you use a private/protected/public attribute? What is the difference?
     The difference is the abstraction level.
-    Personally I'm using private for all fields in objects, getter setter other methods are package-private and 
+    Personally I'm using private for all fields in objects, getter should be public, setter and other methods are package-private and 
     just the top level class (while possible) have public methods, to give controll for the user.
     
 #### How do you prevent developers from subclassing a class?
@@ -421,6 +440,18 @@
     Also less code needed, without overloading we are able to handle multiple parameter or return value.
     
 #### Given two Java programs on two different machines. How can you communicate between the two? What are the possible ways?
+    The java.net package in the Java platform provides a class, Socket, that implements one side of a two-way connection between 
+    your Java program and another program on the network. The Socket class sits on top of a platform-dependent implementation, 
+    hiding the details of any particular system from your Java program. 
+    By using the java.net.Socket class instead of relying on native code, 
+    your Java programs can communicate over the network in a platform-independent fashion.
+    
+    Additionally, java.net includes the ServerSocket class, which implements a socket that servers can use to listen for 
+    and accept connections to clients.
+    
+    Connect to the Web, the URL class and related classes (URLConnection, URLEncoder) are also might help, one application
+    can send data and the other can gather it for itself. 
+    URLs are a relatively high-level connection to the Web and use sockets as part of the underlying implementation. 
     
 #### What is an annotation? What can be annotated and how? Show examples.
     Annotation is a form of syntactic metadata that can be added to Java source code.
