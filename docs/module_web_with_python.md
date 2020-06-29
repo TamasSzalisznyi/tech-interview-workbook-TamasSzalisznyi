@@ -15,9 +15,9 @@
 Layered architecture is a client–server architecture
  - presentation
  - application processing
- - data management functions<br
+ - data management functions<br>
 
-<blayer</b and <btier</b: layer is a logical-, tier is a physical structuring.
+<b>layer</b> and <b>tier</b>: layer is a logical-, tier is a physical structuring.
 
 ### Error handling
 #### What error can occur, when an array does not have an element on the requested index?
@@ -188,10 +188,11 @@ the function can be called via a variable which is assigned to the function decl
 
 #### List the ways of defining a callable logical unit in JavaScript!
 - normal functions can be called directly
-- class methods
+- as property of an Object, call it as Object method  
 - generator functions
 - arrow functions
-    
+
+As constructors: you can invoke functions as constructors, via the new operator.
 #### What is an event listener? How to attach one?
 Event listeners give functionality to the application. Trough them can be triggered a function by the user.
 Locating the target, attaching a listener function and in the callback handling the event with an event handler function.
@@ -204,9 +205,9 @@ Locating the target, attaching a listener function and in the callback handling 
     - method: `addEventListener`    
     - event listener: a string named event listener type
     - event handler: a callable function
-    
+        
 #### How to trigger an event in JavaScript?
-Event listeners have a target, which for they listen. It can be triggered by:
+Event listeners have a target, which they listen for. It can be triggered by:
 - mouse actions
 - keyboard actions
 - content load (or change) actions
