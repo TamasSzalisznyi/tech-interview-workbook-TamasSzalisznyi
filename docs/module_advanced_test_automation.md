@@ -3,6 +3,11 @@
 ### Testing Basics (ISTQB related)
 
 #### What is the purpose of testing? What is not?
+Software testing is a way to assess the quality of the
+software and to reduce the risk of software failure in operation. 
+common misperception of testing is that it focuses entirely on verification of requirements, user
+stories, or other specifications.
+
 #### What is the difference between Defect, Error, Failure?
 #### What are the testing principles?
 #### What is unit testing? Who is responibile to write unit tests?

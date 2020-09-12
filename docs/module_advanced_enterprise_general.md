@@ -15,10 +15,10 @@
 ### Testing
 #### What are unit test, integration test, system test, regression test, acceptance test? What is the major difference between these?
 #### What is code coverage? Why is it used? How you can measure?
-#### What does mocking mean? How would you do it 'manually' (i. e. without using any fancy framework)?
+#### What does mocking mean? How would you do it 'manually' (i.e. without using any fancy framework)?
 #### What is a test case? What is an assertion? Give examples!
 #### What is TDD? What are the benefits?
-#### What are the unit testing best practices? (Eg. how many assertion should a test case contain?)
+#### What are the unit testing best practices? (Eg. how many assertions should a test case contain?)
 #### What is arrange/act/assert pattern?
 
 ### DevOps
