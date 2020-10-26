@@ -1,0 +1,11 @@
+
+<div hidden="true">
+```
+@startuml outh2flow
+Client --> Browser : credentials: \nname - password
+Browser --> Resource_Owner : HEADER:\nauthorization Basic <base64 encoded>user:pass</base64>
+Browser <- Resource_Owner : authorization grant
+Client <- Browser : resource
+@enduml
+```
+</div>

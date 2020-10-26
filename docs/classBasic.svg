@@ -1,0 +1,9 @@
+<div hidden="true">
+```
+@startuml classBasic
+class ExampleClass
+    ExampleClass : T attribute
+    ExampleClass : method() : void
+@enduml
+```
+</div>

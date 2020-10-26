@@ -1,0 +1,13 @@
+
+<div hidden="true">
+```
+@startuml oauth2flow
+Client --> Resource_Owner : authorization request
+Client <- Resource_Owner : authorization grant
+Client --> Authorization_Server : authorization grant
+Client <- Authorization_Server : access token
+Client --> Resource_Server : access token
+Client <- Resource_Server : protected resource
+@enduml
+```
+</div>
