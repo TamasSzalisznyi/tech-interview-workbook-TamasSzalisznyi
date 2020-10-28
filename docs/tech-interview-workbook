@@ -11,7 +11,10 @@ There are four principles:
 ##Inheritance. Explain the concept with realistic example.
 An class can inherit fields and attributes from it's ancestor, which is a way to avoid code 
 duplication and also make it reusable.
-TODO: example
+```youtrack
+    class Public
+```
+
 
 ##Polymorphism. Explain the concept with realistic example.
 Polymorphism describes a pattern in object oriented programming 

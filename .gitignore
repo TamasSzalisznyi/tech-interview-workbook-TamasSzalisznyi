@@ -1,5 +1,5 @@
 # Jetbrains settings
 .idea/
-
+venv/
 # VisualStudioCode
 .vscode/
