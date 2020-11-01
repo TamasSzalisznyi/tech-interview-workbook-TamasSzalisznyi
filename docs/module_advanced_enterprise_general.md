@@ -55,7 +55,7 @@ DAO implementing an interface, the application can access through the interface 
 translate the demand, connect to the DB, start query and send back the response to the sender.
 
 When: when using DB, persistence and CRUD operations.
-How: with interface.
+How: with an interface.
 
 #### What is SOA? When to use?
 Service Oriented Architecture. Similar in modularity and reusability to microservices, but in enterprise level. 
@@ -68,8 +68,8 @@ Integration test. A much bigger scope for running test over a workflow, examine 
 Regression test. The biggest scope of running tests by, this aim the whole system behavior.
 Acceptance test. The final test, done by real user to validate the application successness.
 
-Major difference: unit, integration, regression are done by developers or testers and can be automated, 
-but acceptance done by user and (mostly) manual test.
+Major difference: unit-, integration- and regression tests are done by developers or testers and can be automated, 
+but acceptance done by user(or user view) and (mostly) manual test.
 
 #### What is code coverage? Why is it used? How you can measure?
 This is a metric that should reflect the percentage or exact number of lines which was executed during a test.
@@ -88,7 +88,7 @@ e.g.: I like to show some system, where an order placed and sent to a warehouse.
 examine the warehouse exact behaviour, so we put expected reactions in the class, but we wan to know if the unit work as it is expected.
 With that equipped we can say after the test how the warehouse reacted to the unit call, and not that what is the state after the execution.
 
-```javascript
+```java
     class UnitTestClass {
         
     // unit under test is an object to represent some order. mock object representing a warehouse
@@ -139,14 +139,14 @@ Assertion is the actual comparison of the expected data with the actual data.
 Actual data come from the test method like the return value, expected data can come from many places:
 excel, csv, hard code, magic number etc...
 
-```javascript
-@Test
-void i_test_assertion_for_workbook_if_green_then_ok() {
-    int expectedNumber = 42;
-    SomeClass sc = new SomeClass();
-    int veryMysteriousNumber = sc.doSomethingVeryUsefulAndComplex;
-    Assertions.assertEquals(expectedNumber, veryMysteriousNumber)
-}
+```java
+    @Test
+    void i_test_assertion_for_workbook_if_green_then_ok() {
+        int expectedNumber = 42;
+        SomeClass sc = new SomeClass();
+        int veryMysteriousNumber = sc.doSomethingVeryUsefulAndComplex;
+        Assertions.assertEquals(expectedNumber, veryMysteriousNumber)
+    }
 ``` 
 
 #### What is TDD? What are the benefits?
@@ -174,7 +174,7 @@ Assert: that the expected results have occurred.
 
 separated by blank lines.
 
-```javascript
+```java
 @Test
 void i_test_assertion_for_workbook_if_green_then_ok() {
     int expectedNumber = 42;

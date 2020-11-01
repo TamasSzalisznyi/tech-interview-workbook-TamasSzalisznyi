@@ -1,4 +1,4 @@
-#!/home/tamas/projects/tech-interview-workbook-TamasSzalisznyi/venv/bin/python
+#!/home/tamas/projects/tech-interview-workbook.md-TamasSzalisznyi/venv/bin/python
 # -*- coding: utf-8 -*-
 import re
 import sys
