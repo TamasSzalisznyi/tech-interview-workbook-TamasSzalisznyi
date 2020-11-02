@@ -5,62 +5,106 @@
 ### Architectures
 
 #### What is n-tier (or multi-tier) architecture?
- the processing, data management, and presentation functions physically and/or logically separated
-    -presentation layer
-    -application layer
-    -integration layer
-    -database layer
+ In order to modularity and single responsibility the n-tier architecture divide the processing, data management, and presentation 
+ functions, and order them into different modules and layers logically maybe also physically as well.
+
+ This is a basic model, it can be more layered:
+    -presentation layer: templates, template-engines
+    -application layer: business logic and other application process related stuff
+    -database layer: in memory or a kind of database.
+ Important to mention that the separated parts should communicate with each other through well-defined APIs. 
+ An implementation should depend on an interface rather than a specific implementation, and should 
+ expose public methods with interface abstraction.     
+ With this kind of architecture replacing modules or extending the actual structure, also testing become much easier.
+ Also, allow developing and testing different parts and phases parallel.
     
 #### What are microservices? Advantages and disadvantages?
- A large software project which is built from loosely coupled modules, which communicate with each other.
+ Microservices is an architecture style where the application is a collection of services. 
+Even a large software project can built from loosely coupled modules, which communicate with each other.
  
  Advantages:
-     Improved fault isolation: Larger applications can remain mostly unaffected by the failure of a single module.
-     Eliminate vendor or technology lock-in: Microservices provide the flexibility to try out a new technology stack on an individual service as needed. 
-     There won’t be as many dependency concerns and rolling back changes becomes much easier. 
-     With less code in play, there is more flexibility.
-     Ease of understanding: With added simplicity, developers can better understand the functionality of a service.
-     Smaller and faster deployments: Smaller codebase and scope = quicker deployments, which also allow you to start to explore the benefits of Continuous Deployment.
-    Scalability: Since your services are separate, you can more easily scale the most needed ones at the appropriate times, as opposed to the whole application. When done correctly, this can impact cost savings.
+     - Improved fault isolation: 
+     Larger applications can remain mostly unaffected by the failure of a single module.
+     - Eliminate the vendor or technology lock-in: 
+     Microservices provide the flexibility to try out a new technology stack on an individual service as needed. 
+     - Smaller and faster deployments: 
+     Smaller codebase means quicker develop, test, deployment phases. CI/CD processes gain importance
+     - Scalability: 
+     This is the main benefit of a microservice. A good implemented system respond for increased need of service with copies 
+     of serving systems. This can save time to provide enough service at increased usage, keep up the quality of service and
+     saves costs by not operating unnecessarily service.
+     - Highly maintainable and testable: 
+     As benefit from modular and loosely coupled design.
+     - Rapid, frequent and reliable delivery:
+     Even large, complex application can developed by a relatively small team.
+       
  Disadvantages:
-    the main negative of microservices is the complexity that any distributed system has.
-    Communication between services is complex: Since everything is now an independent service, 
-    you have to carefully handle requests traveling between your modules. 
-    More services equals more resources: Multiple databases and transaction management can be painful.
-    Global testing is difficult: Testing a microservices-based application can be cumbersome. In a monolithic approach, we would just need to launch our WAR on an application server and ensure its connectivity with the underlying database. With microservices, each dependent service needs to be confirmed before testing can occur.
-    Debugging problems can be harder: Each service has its own set of logs to go through. Log, logs, and more logs.
-    Deployment challengers: The product may need coordination among multiple services, which may not be as straightforward as deploying a WAR in a container.
-
+    Disadvantages coming from the main concept of the design. Complexity, as a distributed system has in many aspects.
+    - Communication between services is complex: 
+    Handle requests traveling between independent service modules could be very complex. 
+    - More services means more resources: 
+    Multiple databases and transaction management can be resource intensive.
+    - Global testing is difficult: 
+    Testing a microservices-based application can be cumbersome. 
+    With microservices, each dependent service needs to be confirmed before testing can occur.
+    - Debugging problems can be harder: 
+    Each service has its own set of logs.
+    - Deployment challengers: 
+    Decentarlized controll.
+    
 #### What is Separation of Concerns?
-Design principle. Means separating a computer program into logically related parts. Concerns.
-Modularity, and hence separation of concerns, is achieved by encapsulating information inside a section of code. 
-Encapsulation is a means of information hiding. 
-Layered designs in information systems are another embodiment of separation of concerns (e.g., presentation layer, business logic layer, data access layer, persistence layer).
+ Design principle. Means separating a computer program into logically related parts. 
+    Separated parts can work on different concerns.
+    Concern can be a task, requirement or else piece of information that affect the program.
+    Modularity, and hence separation of concerns, is achieved by encapsulating information inside a section of code. 
+    Encapsulation interwine with the concern of information hiding together working on separation. 
+    N-tier architecture also a kind of this concern (presentation layer, business logic layer, data access layer, persistence layer).
 
 #### What is a layered design and why is it important in enterprise applications?
-n-tier architecture. separation of concern design.
-It's about security, maintainability, readability, modularity, stability, reusability.
-
+ n-tier architecture. separation of concern design.
+    This kind of design divide the tasks into layers. Layers have one responsibility (like to provide connection to DB or to Web).
+    The tasks divided into smaller parts where every part get some corresponding module to solve it.
+    So layers are interfaces, modules implementing interfaces and depends on other interfaces.
+    This serve the modularity because every implementation behind an interface replaceable by other implementation, 
+    even possible to change parts in implementation as maybe one layer is from multiple interfaces, so some smaller 
+    part also replaceable eventually.
+    Interchangeability and modularity especially important at enterprise level at 
+    security, maintainability, readability, stability and reusability related questions.
+    Every crucial point such as security, or maintain a -server, or a -database become much easier with well-defined parts.
+    Keeping everything up to date with technical improvements with replacing some module, teams can work parallel on different
+    parts to keep up quality, extending or changing the profile of some part.
+    Layers also can protect, at time of error, other layers from damage.
+    Layers with good modularity or other design technique like microservice can provide alternative for currently unavailable
+    modules.
+    
 #### What is Dependency Injection?
-Client who has dependencies and receive the injection.
-Service who provide the dependencies and so provide the injection.
-Injector who is bound together client and service and handle the injection.
-Injection can be done via interface, setter and constructor.
-Goal is to achieve a loosely coupled design where client, service and injector all easily replaceable.
-
+Loosely coupled design, single-responded modules providing and receiving dependencies.
+    Injection done by an interface, a setter or a constructor. 
+    Solutions for tasks coming across the modules instead of inherit or implement some. 
+    Three players:
+        - Client: who has dependencies and receive the injection.
+        - Service: who provide the dependencies and so provide the injection.
+        - Injector: who bound together client and service and handle the injection.
+    
 #### What is the DAO pattern? When and how to implement?
-Data Access Object.
-DAO is used at DB connection. DAO provide the middle layer between business layer and DB layer.
-DAO implementing an interface, the application can access through the interface the DAO, then the DAO
-translate the demand, connect to the DB, start query and send back the response to the sender.
-
-When: when using DB, persistence and CRUD operations.
-How: with an interface.
+ Data Access Object.
+    DAO is used at DB connection. Database layer is one or more interface and DAO implement it with connection to the DB.
+    So the application can access through the interface the DAO, then the DAO
+    translate the demand, connect to the DB, start query and send back the response to the sender.
+    Here the layer have a task: to provide data for caller. 
+    DAO model achieve this with a 
+        - public reachable interface, hopefully the methods of that interface are easy to use (verbose in name, coherent functionality),
+        - and with a set of different implementation.
+    Implementations than share the task with dividing into smaller parts, where every task should have a single responded module, 
+    and every single step should have a single responded method, but the point is, every complex business logic can be hidden
+    under the hood while exposing a common API. 
 
 #### What is SOA? When to use?
-Service Oriented Architecture. Similar in modularity and reusability to microservices, but in enterprise level. 
-Main point is heterogeneous behave.
-
+ Service Oriented Architecture. 
+  Another architectual sytle. Have some important similarity with microservices in modularity and reusability too.
+  The design aim to create a system, with a central core modul and service clusters. Members communicating each other
+  with a common protocol.   
+  
 ### Testing
 #### What are unit test, integration test, system test, regression test, acceptance test? What is the major difference between these?
 Unit test. The most basic building block of the test architecture. Made by developers (mostly).
@@ -151,10 +195,31 @@ excel, csv, hard code, magic number etc...
 
 #### What is TDD? What are the benefits?
 Test Driven Development. 
+A software development process. Relies on the repetition of a very short development cycle: 
+    - red: requirements turned into test cases   
+    - green: after develop tests will pass                   
+    - refactor: code refactoring                 
 
-Benefits come from the basic of the TDD. First writing failing test. Then write the code to make it pass, finally refactor. 
-Earliest stage of testing where it can interweave
- with development.
+This is opposed to most of the other software development processes, where development take first place.
+Benefits:
+
+- test are designed before any line of code has written, from requirements. 
+The acceptance criteria and assertion designed first, after part by part components construction develop to make them pass, 
+not after product done tailoring test for it. That case test can be well suited for a particular system, 
+producing not correct results.
+
+- Earliest stage of testing where it can interweave with development.
+Test are done at the very first stage in software development lifecycle. That save time in designing tests for an application
+by being already cnstructed or a conception for it with the clear requirements based test design.
+
+- Test are highly accurate and reliable.  
+    - tests bring information about the object from the beginning, may help a lot in develop 
+    - test bring more accurate and precise results as they designed to retrive a specific information or
+    observe a particular behaviour etc.
+
+- CI/CD processes gaining place.
+This test-made skeletal-construct model make perfect match with CI offered tools, like orchestration of automated regression test
+or running time or resource costly test processes remotely and paralell.   
 
 #### What are the unit testing best practices? (Eg. how many assertions should a test case contain?)
 Unit tests are should follow the main programming principles:
@@ -340,45 +405,42 @@ e.g. DAO pattern is a good solution for separating them
 
 ### Data Structures
 #### What is the difference between Stack and Queue data structure?
-Stack is a kind of queue.
-The common part is: the information flow or the execution order are one-directional, 
-adding- and removing items only possible from the end of the structure.
-The difference is: 
-in stack: new element added to the top of the stack and also the next element coming from the top. FILO 
-in queue: new element added to the end of the stack and the next element always coming from the top. FIFO
+Stack is a kind of queue both are a kind of a collection.
+
+Stack: elements are added to the top of the stack and the next element also coming from the top of the stack. FILO 
+Queue: elements are added to the end of the stack and the next element coming from the top. FIFO
+
 -> polling, peeking, pushing
 
 #### What is a graph? What are simple graphs? What are directed graphs? What are weighted graphs?
-An abstract data type. A set of points (nodes) and edges, where points are bounded together with edges
-and those edges have at least one, at most two nodes.
+An abstract data type. A set of points (nodes) and lines connecting them (edges).
 
-Simple graph where all the nodes connected with at most one edge.
+- Simple graph: where all the nodes are connected, and connected only once, with one edge.
 
-Directed graph where edges have direction (and this is represented) 
-meaning that an edge between A - B is not equal to B - A.
+- Directed graph: where edges associated with a direction, int hat case an edge between 
+A - B is not equal to B - A.
 
-Weighted graph where the edges have a label, represent a value (length, weight, price etc...) which is the cost of the edge.
+- Weighted graph: where the edges have a label, represent a value (length, weight, price etc...) which is the cost of the edge.
 
 #### What are trees? What are binary trees? What are binary search trees?
-Tree is a special graph, where every two node connected with exactly one edge.
-Tree must be a connected- (there are no node without edge), and a simple-graph.
+Tree is a special graph, directed and simple, one node representing the root,
+and the rest of the nodes are children of that root.
 
-Binary tree is a kind of graph, which is tree, and every node have at least one and at most two edges.
+Binary tree is a kind of tree, where every node have at least one and at most two edges.
 
-Binary search tree is a searching algorithm which use rooted binary tree to store and retrieve the data. 
-BST. In BST every node represent a value. The root of the tree represent the half of the highest value. 
-Nodes in the left sub-tree containing lower values as the root,
-nodes are in the right sub-tree containing higher values then the root value. 
- 
+Binary search tree is a searching algorithm which use binary tree where the data stored sorted.
+The lower value from root goes to left and higher value goes to right.
+Retrieving the data follow this order make it efficient the search.
+  
 #### How can you store graphs in programs? What are the advantages/disadvantages per each?
-As nodes and edges: like in linked list.
-As a list of all nodes and edges.
-As a matrix of connections.
+-Nodes as objects and edges as pointers
+-A matrix containing all edge weights between numbered node x and node y
+-A list of edges between numbered nodes
 
 #### What are graph traversal algorithms? What is BFS, how does it work? What is DFS, how does it work?
 They are used for traversing the graph, they implement the logic in the graph, how the nodes are reached.
  
-Breath First Search. Search through every graph level (if it is a tree). Once finished move to the next level.
+Breath First Search. Search through every tree level. Once finished move to the next level.
 Depth First Search. Start an iteration from the root and going as far possible before tracking back and starting a new route. 
 
 #### How does dictionary work?
@@ -434,7 +496,7 @@ Cross-Origin Resource Sharing.
 Security policy to protect resources from malicious or uncontrolled actions.
 
 Same-Origin allows browsers for use their resources just from the same url.
-CORS allows browsers fro use their resources in a controlled way, server describe who and what allowed to do.
+CORS allows browsers for use their resources in a controlled way, server describe who and what allowed to do.
 The defined policy described in the header, with key: value 
 ```html
     Access-Control-Allow-Origin : [*/allowed-domain(s)]
@@ -445,15 +507,13 @@ else will block after and correspond to the preflight response.
 
 #### How can you initialize a CSRF attack?
 Cross Site Request Forgery.
-main points: 
--cookie stole (or different credentials)
--malicious script
--send it with the stolen cookie
--from a trusted site
+
+If somebody place a malicious script and stole a cookie (or different credential) then send the malicious content
+from the script with the stolen cookie from a trusted site with valid identification to somewhere.
 
 #### What is JWT used for? Where to store it on client side?
 Stand for JSON Web Token. It is used to involve an authorization server, which produce a token in exchange to the credentials.
-It is for secure the credentials, as used once than go with tokens. Tokens can expire for more secure.
+It is for secure the credentials, as using only once than go with tokens. Tokens can expire for more secure.
 JWT stands from
     -header 
     -payload 
@@ -464,14 +524,148 @@ The token is a concatenation of the base64 data of the above, delimited by a per
 
 [header].[payload].[signature]
 
-Maybe in the browser memory, encrypted, proper implementation.
+JWT should be stored in the browser memory in an encrypted form.
 
 ### Threaded programming
 
 #### When do you need to use threads in an application?
+Threads are used to achieve parallelism - this way an application can be faster by doing multiple things at the same time.
+Using multiple threads can be very costly. However, there are cases when you can benefit from it, like:
+- Creating asynchronous operations.
+- Creating parallel operations.
+- Creating continual running background operations.
+- Take full advantage of CPU power (with multiple cores)
+- Reducing response time. (divide a big problem to smaller chunks)
+- Serve multiple clients at the same time.
+
 #### What is a daemon thread?
+We can differentiate user threads and daemon threads. User-threads are high-priority threads. 
+Daemon threads has low-priority. The role of these threads are to provide services to user threads. 
+Their life depends on user threads. The JVM will wait for any user thread to complete its task 
+before terminating it, but daemon threads aren't supposed to prevent JVM from exiting.
+In Java, there are automatically running daemon threads, like finalizer, garbage collector, etc.
+They serve mostly users with memory allocation and garbage collection.
+
 #### What is the difference between concurrent and parallel execution of code?
+Concurrent execution: Running lots of independent things at the same time. A task doesn't have to wait for the other tasks
+to finish, for it to advance. In single-core setup, suspending and alternating between threads is required 
+(also called pre-emptive multithreading / task switching).
+
+In parallel execution:
+ Application breaks down a task into subtasks, and they advance simultaneously at the same time. 
+
+In concurrent execution:
+ Means that it processes more than one task at the same time, 
+ 
 #### What is the most important problem developers are faced when using threads?
+Deadlock: when two or more threads waiting for each other to lend access to a resource, so they are blocked forever.
+Starvation: Occurs when a process never gains accesses to resources, never allowing the program to finish.
+Race Condition: Occurs when two or more threads can access shared data, and they try to change it at the same time.
+Livelock: Occurs when two threads are dependent on each other signals and are both threads 
+    respond to each others signals occuring a 'while like' infinite loop.
+
 #### In what kind of situations can deadlocks occur?
+First there are locks:
+A lock occurs when multiple processes try to access the same resource at the same time. One process loses out and must wait
+for the other to finish.
+
+Deadlock occurs when: Thread ‘A’ locks Resource 1, that Thread ‘B’ wants to use, and Thread ‘B’ locks Resource 3 that 
+Thread ‘A’ wants to use at the same time, and they get stuck forever.
+
 #### What are possible ways to prevent deadlocks from occurring?
-#### What does critical section or critical region mean in the context of concurrent programming?
+When two or more process wish to use the same resource is a race condition. 
+The part of the program where accessesing the shared resource is known as the critical section. 
+So, to avoid a race condition, we need to synchronize access to the critical section.
+Java offer a couple of solution:
+
+- Mutex (or mutual exclusion).
+The simplest type of synchronizer – it ensures that only one thread can execute the critical section of a computer program 
+at a time. To access a critical section, a thread acquires the mutex, then accesses the critical section, 
+and finally releases the mutex. In the meantime, all other threads block till the mutex releases. 
+As soon as a thread exits the critical section, another thread can enter the critical section. Mutex is applied to the
+resource with the ```synchronized``` keyword.
+
+```java
+    //an example resource
+    public int getNextSequence() {
+        classVarible += 1;
+        return classVarible;
+    }
+
+    //and applying the mutex to ensure synchronous access
+    @Override
+    public synchronized int getNextSequence() {
+        return super.getNextSequence();
+    }
+```
+   
+- ReentrantLock.
+The thread can reenter any block of code for which it already holds the lock.
+
+```java
+...
+  boolean isLocked = false;
+
+  public synchronized void lock()
+  throws InterruptedException{
+    while(isLocked){                //here the mutex is implemented as spin-lock
+      wait();
+    }
+    isLocked = true;
+  }
+...
+
+private ReentrantLock mutex = new ReentrantLock();
+ 
+    public int getNextSequence() {
+        try {                               //and here, in the
+            mutex.lock();                   //critical section
+            return super.getNextSequence(); //the method who access the resource
+        } finally {                         //the process can re-enter to the resource
+            mutex.unlock();                 //while other processes are waiting
+        }
+    }
+```
+
+- Semaphore:
+While in case of a mutex only one thread can access a critical section, 
+Semaphore allows a fixed number of threads to access a critical section. 
+Therefore, we can also implement a mutex by let the resources use a pool.
+
+```java
+public class SequenceGeneratorUsingSemaphore extends SequenceGenerator {
+    
+    private Semaphore mutex = new Semaphore(1); //the pool
+ 
+    @Override
+    public int getNextSequence() {
+        try {
+            mutex.acquire();                    //an access granted
+            return super.getNextSequence();
+        } catch (InterruptedException e) {
+            // exception handling code
+        } finally {
+            mutex.release();                    //and returned
+        }
+    }
+}
+```
+
+#### What does the critical section or critical region mean in the context of concurrent programming?
+Parts of the program where the shared resource can be accessed is the critical section.
+It cannot be executed by more than one process. Typically, the critical section accesses a shared resource, such as a 
+- data structure, 
+- a peripheral device, or 
+- a network connection, 
+
+For example, in networking. 
+A network socket wait some ordered data. 
+Let's say we have an ordering program that is able to order this data and pass to the socket. 
+This part of code is the critical section, where socket get ordered data (resource) and sorting methods (processes) wish to
+pass their load.  
+
+Another example, for data structures. 
+It might be that given a collection (a resource) and two or more processes 
+are also a couple of method (processes) which want to read this resource. 
+(for example a list. one process is running through the list, while other proccess trying to modify or delete the same resource.) 
+The part of the code where any method have access to the collection is a critical section.
