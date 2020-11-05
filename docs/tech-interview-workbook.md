@@ -1,7 +1,14 @@
 # OOP / General
 ## What is OOP?
-Object Oriented Programming. Programming paradigm, meaning methods and fields (attributes) 
+Object Oriented Programming. Programming paradigm, meaning methods (procedures) and fields (attributes) 
 are encapsulated into entities: objects.
+Program written in OOP concept is a set of interacting objects, where objects can access and modify fields
+using methods. 
+Java is multi-paradigm language, combining imperative and procedural elements.
+(imperative: program using commands to perform operations, and with these imperative commands describing how the 
+program should operate.)
+(procedural: procedures are computational steps, procedures performing the containing code after a procedure call,
+at any point of the execution.)
 There are four principles: 
 - Encapsulation, 
 - Abstraction, 
@@ -245,8 +252,19 @@ Overloaded methods have to have the same name but can differ in parameter list. 
 from the passed arguments which method will go in the stack.
 
 ##What are different types of arguments? (context: pass by value / pass by reference)
-In Java, everything is passed by value. Primitive types passed directly by value, Non-primitives passed by their reference value.
-Formal arguments, actual arguments. 
+In Java, everything is passed by value. Primitive types passed directly by value, Non-primitives passed by their 
+reference value.
+Formal arguments are the parameters defined in method signature. 
+Actual arguments are the actual parameters passed to the called method by the caller.
+
+```java
+public void method(String param1, int param2, T paramN) {} --> parameters, formal arguments
+
+public void someWhereInMethodBody() {
+    method("string", 4, SomeObject);  --> are actual arguments
+}
+ 
+``` 
 
 ##What is method overriding?
 Runtime (dynamic) polymorphism. This is when a method with same signature and return type declared both in super- and subclass.
@@ -286,12 +304,38 @@ Not mandatory but we can have. Or not.
 If the reference from that instance passed to the static method, yes.
 
 ##What are base class, subclass and superclass?
-Base class is synonymous for superclass (or can refer for every object mother, the Object class itself).
-Subclass is a class which extend an another class, which is then become a superclass.
+Base class is a synonym for a superclass (or can refer for every object mother, the Object class itself).
+Subclass is a class which extend another class, which is then become a superclass.
+In Java except the Object class itself, every class is a subclass from that. So can be referenced Object as
+the baseclass for every object, where these objects can be superclasses if other classes inheriting them, 
+which becomes subclasses then. 
 
 ##What is data hiding?
-Controlled method and property abstraction with modifier keywords.
+Controlled method and property abstraction with visibility modifier keywords and encapsulation.
 
+keywords:
+```java
+public class HideThePainHarold {
+    
+    public int number = 4;                  //not hided
+    private String name = "hided string";   //hided data
+
+    public void printName() {       
+        System.out.println(name);           //hided data abstracted
+    }
+}
+```
+
+encapsulation:
+```java
+public class OuterClass {
+    //...fields and methods
+                                    
+    static class InnerClass {              // outer class should hide the inner class with proper keywords 
+        // ...fields and methods
+    }   
+}
+```
 ##What is variable shadowing?
 Some languages permit more than one variable with the same name, but they have to be in different scope.
 In Java this can be explicitly indicated with the 'this' keyword.
@@ -338,6 +382,24 @@ memory after local variables are reached the end of the lifecycle (the method ha
 Everything in OOP should be responsible for one goal.
 A method should be responsible just for one logical step. If more steps are need we should create more methods.
 A class purpose is only one thing: fulfilling one requirement through encapsulating a bunch of method and attribute. 
+
+For example an object created as defined its class is responsible for creating a connection to DB.
+This object has methods which are necessary for creating that connection. Just theoretical but: 
+- one method should handle the authentication (the form where those are coming are not the responsibility of that object),
+- one create the connection with the DB (as every Db has its own specification how to connect them), 
+- one method should offer that connection to take parameters to execute (the query what should be executed is not part 
+of our object, and the process how the query done also not part our object) and 
+- one finish the procedure and close the connection.
+
+As Robert C. Martin define a responsibility: as a reason to change. 
+(if we would change one thing, there should be one part responsible for that.)
+
+Staying at the above example: 
+- If we want to change the DB, we should replace just our example object with another DB handler.
+- If we change the authentication from prompting the user to type it for read it from property or environment file, no problem, 
+our object only take data to pass it to the DB and not worrying about where those are coming from.
+- If we want to change the query, no problem, our object only get and pass them.
+- If the way change how the connection should be established with the DB, no problem, we should change only one method.
 
 ##What is an object oriented program? Explain, show.
 Where the program is a set of interacting objects.
@@ -451,11 +513,31 @@ An unsigned int. because int have much higher maximum value than 200, but unsign
 ##Think about money ;) How would you store a currency value, that shall support decimal parts? Think it through again, and try to think outside of the box!
 -->
 -->
+depends how accurate should be 
+one extra space for rounding
+
 ##What do you think, why there is no string type in Java?
-Because String is a wrapper class for char. As it is an object, it can have a state of immutable array of chars.
+-->
+Because String is a sequence of chars representing words, where char represent a letter, 
+words can contain letters in infinite combinations. 
+Java designers separated basic components from objects, and placed under a superinterface 'Type' as primitive types and
+reference types. Because Java is strong-static typed language everything belong for this two types.
+While primitive types in Java represent a fixed length numeric value at memory level, (int 32bit, long 64bit, char 16bit, boolean 2bit)
+a string literal represent a possible permutation of chars.
+As string can vary in length, the creators created a class for it, where the String class
+offer methods for interact with string (charAt(), concat()...) or gather information about them (length()).
+Moreover, strings have a really important attribute, as they represent a lot of different local letter (nations different alphabets, 
+special characters...) the system have to know how to interpret them. String class contain data about encoding and decoding.
+("S\u00ED Se\u00F1or" = Sí Señor in Spanish)
+Also important to mention strings have a really important role in the interaction with humans, namely:
+named variable references improve readability. 
+As Java designers providing a class and let us use Strings as an object, this make possible the immutable attribute of
+any string literal. 
+Thanks of all the above mentioned attributes, String capable to be a unique identifier, and Java use this identifier to
+distinguishes classes, methods, variables, hashmap keys etc.
 
 ##What is the largest number you can work with in Java?
- !!(2-2-52)·21023 the double max_value, after it come the positive infinity.
+ !!(2 base 2-52)·21023 the double max_value, after it come the positive infinity.
 --> bigdecimal
 
 ##What happens if you try to call something, that you have no access to, because of data hiding?
@@ -500,6 +582,9 @@ They are cutting the original array into two and insert an elem into a new array
 the copy of the original half of array on each end respectively.
 
 ##What is the "golden rule" of variable scoping in Java? What is the lifetime of variables?
+Golden rule: application through of it parts should be stateless, but state required in many situation (database, external files...).
+To solve that: state isolation should be used like encapsulation and layered abstraction.
+
 Variables declared static in a class (above method scope) are class variables or globals.
 Globals are visible for every instance within the access modifier. The lifetime span through the entire app lifetime.
 

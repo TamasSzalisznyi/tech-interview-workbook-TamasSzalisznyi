@@ -433,8 +433,12 @@ The lower value from root goes to left and higher value goes to right.
 Retrieving the data follow this order make it efficient the search.
   
 #### How can you store graphs in programs? What are the advantages/disadvantages per each?
--Nodes as objects and edges as pointers
+-Nodes as objects and edges as pointers to other objects.
+A: the nodes are stored as they are really are.
+D: traversing or just exploring can be difficult.
+
 -A matrix containing all edge weights between numbered node x and node y
+
 -A list of edges between numbered nodes
 
 #### What are graph traversal algorithms? What is BFS, how does it work? What is DFS, how does it work?
