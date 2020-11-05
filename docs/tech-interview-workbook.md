@@ -547,7 +547,7 @@ IllegalAccessException will be thrown.
 Arrays have fixed length, after creation the array is immutable against structural modification, 
 but it is possible to change the value for null or 0. 
 ConcurrentModificationException can be thrown against structural modification   or
-IndexOutOfBunds can be thrown against iterate over the array last element
+IndexOutOfBunds can be thrown against iterate over the array last element.
 
 ##What happens if you try to delete/drop/add an item from a List, while you are iterating over it?
 Different list implementations are eg. LinkedList, ArrayList
@@ -619,14 +619,16 @@ int retrieveIteratorVariable() {
 
 ##What kind of packages do you know under java.util.* ? Bring at least 3 examples.
 List implementation: ArrayLst, LinkedList, HashMap, HashSet, Stack
-Utility: Arrays.asList(T...), Collection.singletonList(T), Optional, Random, Date
+Utility: Arrays.asList(T...), Collections.singletonList(T), Optional, Random, Date
 
 ##Given two Java programs on two different machines. How can you communicate between the two? What are the possible ways?
+https://softwareengineering.stackexchange.com/questions/262897/local-communications-between-two-apps
+-->
 
 ##When you use method overriding, can you throw fewer exceptions in the subclass than in the parent class? Why?
-Yes. Access modifier can be the same or higher, signature the same, but exception list can be narrower.
---> Liskov subtitution principle: the ability to refer to an object from it's super class
--> A sub class from the super class exception can be referred from it's super class
+Yes. Access modifier can be the same or higher, signature have to be the same and exception list can be narrower.
+-> Liskov substitution principle: the ability to refer to an object from its super class
+-> A sub class from the super class exception can be referred from its super class
 
 ##When you use method overriding, can you throw more exceptions in the subclass than in the parent class? Why?
 No. The subtypes must be substitutable for their supertype (Liskov) without ever having to modify the client code. (Open - closed) 
@@ -637,8 +639,8 @@ The over-rider method can be more accessible than it's subject method.
 This isn't break the parent class contract: Subclass able to behave (-> reachable for others now) at least like its superclass.
 
 ##When you use method overriding, can you change the access level of the method, from public to protected? Why?
-No. Beacuse it would break the Liskov principle. If some object depend from the superclass method, and if it would be accessible for
-less members, then the depending class should be confronted with an IllegalAccessException in contrast for its contract.  
+No. Because it would break the Liskov principle. If some object depends on the superclass method, and if it would be accessible for
+fewer members, then classes depending on that method should be confronted with an IllegalAccessException in contrast for its contract.  
 
 ##Which interfaces extend the Collection interface in Java. Which classes?
 i: List. c: LinkedList, ArrayList.
@@ -653,12 +655,50 @@ The only plausible answer seems to be key-value pairs, but in the end this provi
 “You can't ask what value a given key maps to, nor can you delete the entry for a given key without knowing what value it maps to.”
 
 ##What is JPA? What is JDBC? Which are the advantages and disadvantages of each? When to use each?
+JPA: Java Persistence API (Jakarta Persistence API)
+JDBC: Java Database Connectivity (also API)
+
+JDBC: is a thin layer between Java and DB. Many DB vendors have they own specific query language.
+Vendors providing driver for their own product, with this technique developers have a common interface to make DB query
+and to receive results.
+A: 
+- provide access to the DB using only the driver from DB vendor with a thin API
+- the API provide basic methods to manipulate the DB:
+    - it can be advantage if the size and/or complexity does not require too much complicated solution
+    - it can be an advantage as processing queries and results are highly customizable
+D:
+- because of the API provide a 'direct' access to the DB mappings from results to objects can be messy
+- user have to set up everything related to create proper objects for Java:
+    - converting objects into tables and back
+
+JPA: is a standard for ORM (Object Relational Mapping) that describes the management of relational data. Famous JPA implementation is Hibernate, also used in Spring.
+A:
+- an implemented JPA map the results into objects and make queries against a DB, so users don't have to deal how the translation
+processed between DB and Java
+- high level interface between Java program and DB
+- it can be said with a strong exaggeration that JPA provide a configured JDBC to users
+
+D:
+- it can be difficult to use as different implementations using different logic, usually annotations providing
+mapping tasks
+- in case developer would implement the JPA by him/her-self, it can be over engineered for the task
+-->
+
 ##How does HashMap work?
+HashMap use a Linked List to store the data in 'buckets', and use a List (array) to store the hashed keys.
+(like a dictionary in Python) 
+Keys are usually Strings, because of the immutable attribute.
+The index of the key is the exact location of the bucket. Advantage of hashmap is the fact, that performing one iteration is
+enough to find the corresponding value, and that linked list store the data in a very memory efficient way.
+Also put() (insert key-value pair) and get() (retrieve value for key) has a nice O(1) time complexity.
+
 ##What is the connection between equals() and hashCode()? How are they used in HashMap?
 ##Why is it important for keys in a map to have an immutable type? (Consider String for example.)
+Otherwise values can be lost if the key can change.
 
 ##What is the purpose of the ‘equals()’ method?
 To give space for every class to define itself how would be compared for other objects.
+Also without equals would be impossible to compare to objects.
 
 ##What is the difference between '==' and 'equals()'?
 equals() can provide a self defined way to an object to be able to compared again other objects.
@@ -806,11 +846,28 @@ available before any object and for every object. Eg.: Math library, Collection,
 
 ##What is annotation? What can be annotated and how? Show examples.
 ##What is a ternary operator?
--->
+Ternary producing the same outcome as an if-else branch does, but in a more compact way.
+```java
+String ternary = "ternary";
+String outcome;
+
+if (ternary.equals("ternary")) {
+    outcome = "yeah";
+} else {
+    outcome = "baah";
+}
+``` 
+the same using ternary:
+```java
+String ternary = "ternary";
+String outcome = ternary.equals("ternary") ? "yeah" : "baah";
+
+```
 
 ##How many instances can be created for an abstract class?
 Abstract keyword is for preventing creating an object or defining method body.
-None.
+It allows to define a class in an incomplete state for later implementation in an extending class, 
+but prevent any instatiation directly.
 
 ##What is ‘this’ reference?
 The this keyword point to the object, in case variable shadowing it help clarify the variables hierarchy.
