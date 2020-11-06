@@ -947,14 +947,58 @@ Building tools like maven can build ```.war``` file, but server need to run it.
 
 #Algorithms, Pseudo code
 ##Fibonacci sequences. Write a method(or pseudo code), that generates the Fibonacci sequences.
+```java
+     void whileFibonacci(int top) {
+        int fibo = 0;
+        int prev = 1;
+        int next;
+        while (fibo <= top) {
+            next = fibo + prev;
+            prev = fibo;
+            fibo = next;
+            out.println("next: " + next + " fibo: " + fibo + " prev: " + prev);
+        }
+    }
+```
 
 ##Factorial. Write a function that, given a number as input, returns the factorial of that number. 
 ##...The factorial of a number ‘n’ is the product of all positive integers less than or equal to ‘n’. 
 ##...So, the factorial of 6 would be 6*5*4*3*2*1 = 720. The factorial of 0 is 1.
+```java
+    int factorial(int n) {
+        if (n == 0) return 1;
+        int factorial = n;
+        for (int i = n - 1; i > 0; i--) {
+            factorial *= i;
+        }
+        return factorial;
+    }
+```
 
 ##Write a function that calculates the factorial of an integer with recursion.
+```java
+    private int factorial = 0;
+    
+    public int recursiveFactorial(int n) {
+        if (factorial == 0) factorial = n;
+        if (factorial > 1) {
+            factorial -= 1;
+            return recursiveFactorial(n * factorial);
+        }
+        else return n;
+    }
+```
+
 ##Write a function, that prints all the files in a given folder and sub-folders using recursion.
 ##What is “Stack overflow”? Write a code, that ends up with stack overflow.
+Method calls going to the stack memory, and they executed in LIFO order. Overflow occur when a method contains an infinite 
+loop, from a while-loop or from a recursive method call.
+```java
+    public int stackOverFlow(int n) {
+        return stackOverFlow(n + 1);
+    }
+```
+
 ##What is Big O complexity? Explain time and space complexity!
 ##What is the Big O time complexity of the common operations in an ArrayList, LinkedList, HashMap? And of a bubble sort, quicksort, finding items in a Binary Search tree?
 ##What is binary search tree (BST)? Write an implementation in Java.

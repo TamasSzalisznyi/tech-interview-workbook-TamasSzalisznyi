@@ -3,49 +3,52 @@
 ### Testing Basics (ISTQB related)
 
 #### What is the purpose of testing? What is not?
-Purpose: to reveal and prevent as much as possible known or hidden 
-defects and bugs
-in order to 
-build and/or improve 
-the overall quality of the product
-and to
-reduce the possibility of failures caused by internal errors 
+Testing process aiming:
+ - to reveal and prevent as much as possible known or hidden defects and bugs
+ - to build and improve the overall quality of the product
+ - to reduce the possibility of failures caused by internal errors
+ - show how the software working under certain conditions.
+<br>
 
-Not Purpose: Setting up the acceptance criteria and design the product 
-Not Purpose2: prove the absence of defects
+Test process would not:
+- prove that the software working well under every circumstance, 
+- prove that the product is bug and failure free
+- In my opinion, the testing should not make acceptance criteria (except in TDD).
+
+To set up the requirements and to define when meet the product with stakeholders demand (or user demand) is a part of <br>
+the software design. A test can be good, but the program bad, if there are requirement gaps.
 
 #### What is the difference between Defect, Error, Failure?
-Error can come happen from many circumstances.
-eg. developer made a mistake or someway the codebase corrupted
+Error: can come from many circumstances. <br>
+Developer made a mistake and stay in the code, or some other way the codebase is corrupted, or maybe <br>
+there are design or requirements failure.
 
-Defect: error then can lead to Defect in the code. ( - Bug)
-if a defect being executed it can lead to Failure.
+Defect: an error can lead to failure but not necessary, only certain circumstances lead to failure. <br>
+If the part of the code containing the defect, is executed, or the environment changed it can lead to failure.
 
-Failure: "The inability of a system or component to perform its required functions 
-within specified performance requirements."
+Failure: the inability of a system or component to perform its required functions.
+- produces an incorrect result or 
+- does not perform the correct action or 
+- does not perform any action. 
 
 #### What are the testing principles?
 1. Testing shows the presence of defects, not their absence.
-2. Exhaustive is impossible. By risk analysis and test techniques focus the test efforts
-3. Shift left - join the testing process early in the software development lifecycle
-4. Defects cluster together. 
-    Aiming the tests for complex parts, 80-20 rule.
-5. Pesticide Paradox. Same test execution count does not increase count of found defect. 
-    - by regression test has a beneficial outcome: the low regression defect number-
-6. Testing is context dependent. There is no universal test design pattern for every product
-7. Absence-of-errors is a fallacy. Good tests are not guarantee for a successful product.
-    (imho - respectively for 1., 2., still hidden bugs can occur and lead to failure
-    , by design failure the product does not fulfill (by any acceptance criteria) the requirements )
+2. Exhaustive is impossible. By risk analysis and test techniques focus the test effort.
+3. Shift left - join the testing process early in the software development lifecycle.
+4. Defects cluster together. 80%-20% rule. <br>
+Common experiences that critical parts (20%) containing the most defects (80%).
+5. Pesticide Paradox. Executing the same test does not find more defect. <br>
+(Except regression test. Regression test has a beneficial outcome to execute over and over.)
+6. Testing is context dependent. There is no universal test design pattern for every product.
+7. Absence-of-errors is a fallacy. Good tests are not guarantee for a successful or flawless product.
 
 #### What is unit testing? Who is responsible to write unit tests?
-Unit test cover a piece of code on class level. 
+Unit test cover a piece of code on class level. <br>
 Written by usually the developer who is in white-box situation, 
-to ensure that this build block working properly and independently. 
+to ensure that this build block working properly and independently.
 
 #### What are Test Levels, what is the difference between them?
 (component-[/unit-], integration-, system-, acceptance-testing)
-
---> (component-, component integration-, system-, system integration-, acceptance-testing) <--
 
 Test levels are group of test activities performed in relation with the development lifecycle.
 Grouped by (2.2)
@@ -53,198 +56,107 @@ the objective,
 the test basis
 the test object
 contextual factors (1.4)
-Requiring suitable test environment
+Requiring suitable test environment.
+1. Unit testing:
+- The smallest testable portion of code. This kind of testing helps to test each module separately.
+- The aim is to test each part of the software by separating it. 
+- It checks if that component has fulfilled the functionality or not. 
+- This kind of testing is performed by developers.
+
+2. Integration testing:
+Integration means combining. In this testing phase, different software modules are combined and tested as a group<br>
+- To ensure, that newly added module is working properly and ready for system testing.
+- Check the data flow from one module to other modules.
+
+3. System testing:
+System testing is performed on a complete, integrated system.<br> 
+- It allows checking system's compliance as per the requirements. 
+- It tests the overall interaction of components. 
+- It can involve load, performance, reliability and security test.
+- Often the final test to verify that the system meets the specification. 
+- It evaluates both functional and non-functional testing.
+
+4. Acceptance testing:
+Acceptance test executed to find if the product meet with acceptance criteria.<br> 
+- Basically done by the user, customer or stakeholders. 
 
 #### What is the difference between verification and validation?
-Verification: checking whether the system meet with requirements
+Verification: checking whether the system meet with requirements<br>
 Validation: checking whether the system meet with user and/or stakeholder needs
 
-("
-Verification: Have we built the software right? (i.e., does it implement the requirements).
-Validation: Have we built the right software? (i.e., do the deliverables satisfy the customer).
-" 
+("Verification: Have we built the software right? (i.e., does it implement the requirements).<br>
+Validation: Have we built the right software? (i.e., do the deliverables satisfy the customer)." 
 wikipedia)
 
 #### What are Testing Types, what is the difference between them?
-Testing types are a group of related test activities.
-Differences are the test objectives.
-
-- Functional Testing. Functional quality characteristics: completeness, correctness, appropriateness
-
-- Non-Functional Testing. Non-Functional quality characteristics: reliability, performance, security, 
-    compatibility, usability
-
-- White box Testing. Derived tests based on the product internal structure. 
-    Structure or architect of a system or component is: correct, complete and as specified.
-
-- Change Related Testing. Quality characteristics: confirming that defects have been fixed and 
-    changes does not results in different behavior in regression testing.
-(syllabus)
-
-Installation testing
-Most software systems have installation procedures that are needed before they can be used for their main purpose. 
-Testing these procedures to achieve an installed software system that may be used is known as installation testing.
-
-Compatibility testing
-A common cause of software failure (real or perceived) is a lack of its compatibility with other application software, 
-operating systems (or operating system versions, old or new), 
-or target environments that differ greatly from the original 
-(such as a terminal or GUI application intended to be run on the desktop now being required to become a Web application, which must render in a Web browser). 
-
-Smoke and sanity testing
-Sanity testing determines whether it is reasonable to proceed with further testing.
-
-Smoke testing
-Smoke testing is used as a build acceptance test prior to further testing, e.g., before integration or regression.
-Consists of minimal attempts to operate the software, 
-designed to determine whether there are any basic problems that will prevent it from working at all. 
-Such tests can be used as build verification test.
-
-Regression testing
-Regression testing focuses on finding defects after a major code change has occurred. 
-Specifically, it seeks to uncover software regressions, as degraded or lost features, including old bugs that have come back. 
-Such regressions occur whenever software functionality that was previously working correctly, stops working as intended. 
-For this, it is possible to generate and add new assertions in existing test cases, this is known as automatic test amplification.
-
-Acceptance testing
-Acceptance testing performed by the customer, often in their lab environment on their own hardware, 
-is known as user acceptance testing (UAT). 
-
-Alpha testing
-Alpha testing is simulated or actual operational testing by potential users/customers or an independent test team at the developers' site. 
-
-Beta testing
-Beta testing comes after alpha testing and can be considered a form of external user acceptance testing.
-
-Functional testing
-Functional testing refers to activities that verify a specific action or function of the code. 
-These are usually found in the code requirements documentation, 
-although some development methodologies work from use cases or user stories. 
+- Functional testing.
+This type refers to activities that verify a specific action or function of the code.<br> 
+Test in terms of completeness, correctness and appropriateness.<br>
 Functional tests tend to answer the question of "can the user do this" or "does this particular feature work."
+    - Unit test
+    - Integration test
+    - System test
+    - Acceptance test
 
-Non-functional testing refers to aspects of the software that may not be related to a specific function or user action, 
-such as scalability or other performance, 
-behavior under certain constraints, or security. 
-Testing will determine the breaking point, the point at which extremes of scalability or performance leads to unstable execution. 
-Non-functional requirements tend to be those that reflect the quality of the product, 
-particularly in the context of the suitability perspective of its users.
+- Non-functional testing.
+This type refers to aspects of the software like scalability or performance, behavior under certain constraints, or security.<br> 
+    - Performance testing
+    - Load testing 
+    - Endurance testing. 
+    - Volume testing (is a way to test software functions when for example a file, or a database increase radically in size) 
+    - Stress testing (is a way to test reliability under unexpected or rare workloads) 
+    - Security testing is essential for software that processes confidential data to prevent system intrusion by hackers.
 
-Continuous testing
-Continuous testing is the process of executing automated tests as part of the software delivery pipeline 
-to obtain immediate feedback on the business risks associated with a software release candidate.
-Continuous testing includes the validation of both functional requirements and non-functional requirements; 
-the scope of testing extends from validating bottom-up requirements or user stories to assessing the system requirements associated with overarching business goals.
-
-Destructive testing
-Destructive testing attempts to cause the software or a sub-system to fail. 
-It verifies that the software functions properly even when it receives invalid or unexpected inputs, 
-thereby establishing the robustness of input validation and error-management routines. 
-Software fault injection.
-
-Software performance testing
-Performance testing is generally executed to determine how a system or sub-system performs in terms of responsiveness and stability under a particular workload. 
-It can also serve to investigate, measure, validate or verify other quality attributes of the system, such as scalability, reliability and resource usage.
-Load testing: is primarily concerned with testing that the system can continue to operate under a specific load, 
-whether that be large quantities of data or a large number of users. 
-This is generally referred to as software scalability. 
-The related load testing activity of when performed as a non-functional activity is often referred to as endurance testing. 
-Volume testing: is a way to test software functions even when certain components (for example a file or database) increase radically in size. 
-Stress testing: is a way to test reliability under unexpected or rare workloads. 
-Stability testing: (often referred to as load or endurance testing) checks to see if the software can continuously function well in or above an acceptable period.
-Real-time testing: is a way to test software if timing constraints are met. Systems have strict timing constraints.
-
-Usability testing
-Usability testing is to check if the user interface is easy to use and understand. 
-It is concerned mainly with the use of the application. 
-This is not a kind of testing that can be automated; actual human users are needed, being monitored by skilled UI designers.
-
-Accessibility testing
-Accessibility testing may include compliance with standards such as:
-Web Accessibility Initiative (WAI) of the World Wide Web Consortium (W3C)
-
-Security testing
-Security testing is essential for software that processes confidential data to prevent system intrusion by hackers.
-
-Internationalization and localization testing
- for internationalization and localization validates that the software can be used with different languages and geographic regions. 
-
-Development testing
-Development Testing is a software development process that involves the synchronized application 
-of a broad spectrum of defect prevention and detection strategies in order to reduce software development risks, time, and costs. 
-It is performed by the software developer or engineer during the construction phase of the software development lifecycle. 
-Development Testing aims to eliminate construction errors before code is promoted to other testing; 
-this strategy is intended to increase the quality of the resulting software as well as the efficiency of the overall development process.
-Depending on the organization's expectations for software development, Development Testing might include static code analysis, data flow analysis, metrics analysis, peer code reviews, unit testing, code coverage analysis, traceability, and other software testing practices.
-
-A/B testing
-A/B testing is a method of running a controlled experiment to determine if a proposed change is more effective than the current approach. 
-Customers are routed to either a current version (control) of a feature, 
-or to a modified version (treatment) and data is collected to determine which version is better at achieving the desired outcome.
-
-Concurrent testing
-Concurrent or concurrency testing assesses the behaviour and performance of software and systems that use concurrent computing, 
-generally under normal usage conditions. 
-Typical problems this type of testing will expose are deadlocks, race conditions and problems with shared memory/resource handling.
-
-Conformance testing or type testing
-In software testing, conformance testing verifies that a product performs according to its specified standards. 
-Compilers, for instance, are extensively tested to determine whether they meet the recognized standard for that language.
-
-Output comparison testing
-Creating a display expected output, whether as data comparison of text or screenshots of the UI, 
-is sometimes called snapshot testing or Golden Master Testing unlike many other forms of testing, 
-this cannot detect failures automatically and instead requires that a human evaluate the output for inconsistencies.
-
-(wikipedia)
+- Change Related Testing. 
+Called to confirm that defects have been fixed or changes does not result in different behavior.
+    - Regression testing focuses on finding defects after a major code change has occurred. 
+    - Continuous testing is the process of executing automated tests as part of the software delivery pipeline 
 
 #### What is the difference between white box, grey boy and black box testing?
-user-level_: black-box
-developer-level_: white-box
+White-box Testing. Tests are written in full access to the test object internal structure or implementation.<br>
 
-White-box Testing. Tests are written in full access to the test object internal structure or implementation.
-    in opposite, 
 Black-box Testing. Test are written from the user level, whereas the code is invisible for a tester, test object 
-    reachable through the public api.
-Grey-box Testing. As presumable from the name; tests are written within the knowledge of the internal architecture,
+reachable through the public api or as product.
+
+Grey-box Testing. Tests are written within the knowledge of the internal architecture,
 but interacting with the object from the user level .
 
 #### What is the difference between UAT (User Acceptance Testing) and System testing?
-System test aim the system or product behavior and capabilities. Objects of tests are the how the system perform
-those tasks (functional), and how behave during execution (non-functional)
-(-verification-)
+System test aim to the verification of the system or product behavior and capabilities.<br>
+- how the system perform those tasks (functional), and 
+- how behave during execution (non-functional)
 
-UAT aim to validate how the product or a component fulfill the requirements and 
-how can a user perform processes, objective is how the product fulfill the needs from a user view.
+UAT aim to validate how the product or component fulfill the requirements and how can a user perform processes.
+- how the product fulfill the needs from a user view.
 
 #### Mention the differences between Regression Testing, Smoke Testing and Retesting?
-Smoke Testing. Minimal effort to prove that the software functional. Can reveal really basic defects.
+Smoke Testing. To prove with minimal effort that the object functional, and in the state for further test process.
 
 Retesting. After a bug or issue has been fixed, test cases - where this particular defects were encountered -
-are re-executed to prove the operation successness. Further test cases may be necessary if the issue fixing are 
-involved new functions, methods, modules etc.
+are re-executed to prove the operation successness. 
  
-Regression Testing. After major changes or upon new versions, changing functionality or capabilities etc, 
-regression test is needed to ensure the software has preserved integrity, usability, functionality and capability  
-as before.
+Regression Testing. After major changes or upon new versions, changing functionality or capabilities etc.<br>
+To ensure the software has preserved integrity, usability, functionality and capability as before.
 
-#### What is risk-based testing, whats the point of it?
-RBT aim to prioritize the tests, calculate the risk of failure from the component importance and the likelihood
-of the failure.
-Point is, to reduce the wide range of possible tests, to focus on the effective testing. As the 
-Seven Testing Principle say: exhaustive testing applying on every combination and covering every detail
-usually impossible.
+#### What is risk-based testing, what is the point of it?
+RBT aim to prioritize the tests. <br>
+Calculate the risk of failure from the component importance, and the likelihood of the failure.<br>
+Point is, to reduce the wide range of possible tests, to focus on the effective testing.
 
 #### What is the difference between Static and Dynamic Testing?
-Static testing does not involve the execution of the code, mostly manual examination of the work product
-and code review, analysis often done with automated tools, important part of security testing.
-Aim the system consistency and internal quality.
+Static testing does not involve the execution of the code.
+- manual examination of the work product
+- code review
+- analysis (often done with automated tools)
+
+Aim the system consistency and internal quality.<br>
 Find defects directly rather than searching the root of a failure. 
 
-Dynamic testing can involve much or less execution from a basic part of code to whole system-wide execution.
+Dynamic testing can involve much or less execution from a basic part of code to whole system-wide execution.<br>
 Aim the system visible behavior.
 
-#### Compare V-modell, Waterfall, Agile from testing perspective!
-V-Modell. Test and development goes hand in hand.
+#### Compare V-model, Waterfall, Agile from testing perspective!
+V-Model. Test and development goes hand in hand.
 
 Waterfall. Test phase coming after the work product is done, at the very end. 
 
@@ -422,3 +334,8 @@ Best practices: wait by every step, even custom wait, try-catch block
 #### Compare 2 popular CI systems, one of them should be Jenkins!
 #### What is Docker, why is it useful?
 #### Compare 2 popular Test Automation IDE, one of them should be Katalon Studio!
+
+the process of executing automated tests as part of the software delivery pipeline 
+to obtain immediate feedback on the business risks associated with a software release candidate.
+Continuous testing includes the validation of both functional requirements and non-functional requirements; 
+the scope of testing extends from validating bottom-up requirements or user stories to assessing the system requirements associated with overarching business goals.
