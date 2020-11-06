@@ -156,18 +156,21 @@ Dynamic testing can involve much or less execution from a basic part of code to 
 Aim the system visible behavior.
 
 #### Compare V-model, Waterfall, Agile from testing perspective!
-V-Model. Test and development goes hand in hand.
+![V-model](https://en.wikipedia.org/wiki/V-Model_(software_development)#/media/File:Systems_Engineering_Process_II.svg)
+V-Model. After the project definition born (concept, requirements, design), at implementation phase begin the test process.<br>
+In opposite as the project was designed from bigger shape to implementation, test process start with unit tests and goes to<br>
+comprehensive system and user acceptance test.
 
-Waterfall. Test phase coming after the work product is done, at the very end. 
+Waterfall. Typical waterfall model indicates that the design, implementation and test phases are well separated and sequential.<br>
+Each phase depends on the previous stage. Testing begin after the work product is done, at the very end. 
 
-Agile. Scream for change-related testing, confirmation- and regression-testing
-tdd
-bdd
-kdd
-#### What would you test in case of a simple webshop purchasing function (put items to cart, buy them)? 
+Agile. The most intertwined connection between test and development. <br>
+Design, development and test phases following each other in cyclic order.
+
+#### What would you test in case of a simple web shop purchasing function (put items to cart, buy them)? 
 #### Plan and reason your tests.
 White-box Tests:
---> test every method required for a component to fulfill it's purpose
+--> test every method required for a component to fulfill its purpose
     component: 
         -cart: 
             -how set the content:
@@ -186,7 +189,7 @@ Functional Tests:
 --> test every component about the workflow they supposed to done
     component: 
         I would test the cart with amounts: normal, zero, huge and negative 
-        I would test the DB how it handle the incoming data
+        I would test the DB how it handles the incoming data
     component-integration:
         I would test how the DB reflect the changes in the cart
     system:
@@ -207,15 +210,15 @@ Non-functional Tests:
         -usability: manual: how user can handle the process from the step where items are chosen and present in the cart
     system:
         -performance: automated: what resource need for a shopping workflow
-            starting from cart, with various amount of items
+            starting from the cart, with a various amount of items
     system-integration:
         -performance: automated: what resource need for a shopping workflow
-            starting from login (or from start page), with various amount of items
+            starting from the login (or from start page), with a various amount of items
     acceptance:
         -usability: manual: how user can handle the process from beginning
         
 change-related Tests:
---> run automated (except user acceptance) on every change, after a feature is done or some changes are done
+--> run automated (except user acceptance) on every change, after a feature is done, or some changes are done
     component-integration:
         automated: pipeline with specific branches or test cases
     system-integration:
@@ -227,27 +230,81 @@ change-related Tests:
 ### Reporting, Bugs
 
 #### What steps would you follow when you find a defect?
-Examine every circumstances before report
+- Provide clear and specific steps to reproduce the issue.
+- Gather and insert any relevant logs.
+- Describe reproducible test cases, if applicable.
+
 #### Talk about common test reports, and about their details.
+- Purpose of the document<br>
+Explain details and activities about the testing performed for the Project
+
+- Application Overview<br>
+Brief description of the application tested
+
+- Testing Scope - In Scope, Out of Scope, Items not tested -<br> 
+This section explains the functions/modules in scope & out of scope for testing. 
+Any items which are not tested due to any constraints/dependencies/restrictions should be clearly documented, 
+else it will be assumed that Testing covered all areas of the application.
+
+- Metrics<br>
+Metrics (diagrams, statistics) will help to understand the test execution results. 
+
+- Test Environment & Tools<br>
+Provide details on Test Environment in which the Testing is carried out. 
+    - Server
+    - Database
+    - Tools...
+    
+- Lessons Learned<br>
+This section is used to describe the critical issues faced, and their solutions.<br>
+Lessons learned will help to make proactive decisions during the next Testing engagement,<br> 
+by avoiding these mistakes or finding a suitable workaround.
+
+- Recommendations<br>
+Any workaround or suggestions can be mentioned here.
+
+- Exit Criteria<br>
+This part is defined as a Completion of Testing by fulfilling certain conditions. 
+e.g.:
+    - All planned test cases are executed;
+    - All Critical defects are Closed etc.
+
+- Conclusion/Sign Off<br>
+This section will mention whether the Testing team agrees and gives a Green signal for the application to ‘Go Live’<br>
+or not after the Exit Criteria was met. 
+
 #### What does a bug report contains?
-summary
-environment
-is reproducible
-how reached-what expected
+- Explanation how exactly the product is broken (how reached-what expected)
+- Information needed to reproduce (and fix) problems and the environment
+- Should be an efficient form of communication between the reporter and receiver
+- A good bug report is filed in a defined way
+
+![bug-report](https://docs.google.com/spreadsheets/d/1MRHpj7wzvbEufmERJ31eT2bz_CJ1E8OK7KgzTsnzWP4/edit#gid=0)
+
 #### How would you prioritize a bug?
+I would considerate the following topics:
+- How does the bug affect the flows in the product.<br>
+(A bug causing a dead footer link vs a bug affecting the user’s payment)
+- The impact that the bug cause.<br>
+(For example a user can’t create a new project in a project management software)
+- What is the estimated number of users who will encounter this bug.
+- How big will the effort to fix the bug.
 
 ### Test Automation, Selenium
 
-#### Which testcases should be be automated and which shouldn't?
-should: regression 
-DDT
+#### Which test cases should be automated and which shouldn't?
+Repeatedly executed test cases may be automated, like regression, (continuously adjusted) integration and system tests.
+Test cases where same workflow can be applied and parameterized for big data input even at unit test level. DDT.
+Performance and load tests may be automated.
+Tests if execution taking a long time should be automated to maximize the efficiency.
+Cross-platform and cross-browser tests definitely fall under automated category.  
 
 #### Describe a good automated test!
-blocks are reusable, robust, configurable
+A good automated test in my opinion is simple, modular, robust and reliable, maintainable, well documented and independent.
 
 #### What is Selenium, Selenium IDE, Selenium WebDriver?
 Selenium is the framework, 
-IDE is a direct js implementation to interact with browser, can record and automate tests, speak with the browser on selenese,
+IDE is a direct js implementation to interact a browser, can record and automate tests, speak with the browser on selenese,
 WebDriver is the successor of RemoteControl, accept instructions on selenese or through the client API, has implementation 
 in java, python, php, ruby, c#
 
@@ -326,11 +383,25 @@ the elements are modified by the DOM -> stale element
 Best practices: wait by every step, even custom wait, try-catch block
 
 #### What are the challenges of Mobile Test Automation?
+Huge scale of products on market which are very different in performance, resolution and OS.
 
 ### Advanced Topics
 
 #### What is the difference between CI and CD?
+CD based on CI. CI should compile newly added code, and should perform integration and regression test automated, ease the<br>
+teamwork remotely between team members orchestrating branches, merges and so on. <br>
+CD can be continuous delivery or deployment.<br>
+If delivery its mean: the product has always a version to deploy, upgrade or to ship (release manually).<br>
+If deployment its mean: the product deployed automated; go live, available to download or upgrade (release automatic).<br>
+CI says: the product is ready to pack.<br>
+C delivery says: the product is packed.<br>
+C deployment says: the product is on the shelf.<br>
+
 #### Describe a Continuous Delivery!
+Developers push their code on different branches, then branches merged back to main. <br>
+Automated test are running to verify the system integration and quality.
+The product ready to deliver.
+
 #### Compare 2 popular CI systems, one of them should be Jenkins!
 #### What is Docker, why is it useful?
 #### Compare 2 popular Test Automation IDE, one of them should be Katalon Studio!
