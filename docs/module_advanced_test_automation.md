@@ -386,31 +386,42 @@ Speed and Coverage of Testing<br>
 Without graphical process, execution run faster.
  
 #### What is Data Driven Testing and why is it useful?
-DDT is a methodology that design test scripts and test input into a framework.<br>
+DDT or parameterized test is a methodology that design test scripts and test input into a framework, keeping the data separate from<br> 
+functional tests. The same test script can execute different combinations of input and test results.
 
-The tests are organized around various situation, with many inputs.
-
-
-Data can be stored in text file, cvs, excel... 
+ - reduce the length of code-base as reducing the need of write individual scripts.
+ - reduce the execution time if automated.
+ - improve the reliability with more result.
+ - data-base can be stored separated in text file, cvs, excel which improve the available range of sources.
+ - data-base replaceable.
 
 #### What are the challenges and best practices with dynamically loading web elements?
-WebDriver has an extremely useful tool, the WebDriverWait class. With it's wait library.
+Web applications using AJAX or React load elements asynchronous, and elements state may vary after a site has loaded.<br>
+To locate those elements can be challenging as WebDriver may throw a sort of exceptions, but proper and well<br>
+constructed waits can solve this task.
+Best practices: custom wait, try-catch block.
 
-Challenges are: 
-the elements loaded after the document ready state -> no such element 
-the elements are modified by the DOM -> stale element
-
-Best practices: wait by every step, even custom wait, try-catch block
+Another difficulty can be that web nodes may not preserve the exact location during the application lifetime.
+Best practice: in case of locating with xpath, the xpath should not be the full xpath like:
+```xml
+    /html/body/div[7]/div[2]/div[10]/div[1]/div[2]/div/div[2]/div[2]/div/div/div[2]/div/div[1]/a/h3/button
+```
+but should use a relative xpath like:
+```xml
+    //button[contains(@class, ‘classname’)]
+``` 
 
 #### What are the challenges of Mobile Test Automation?
-Huge scale of products on market which are very different in performance, resolution and OS.
+Huge scale of products on market which are very different in performance, resolution and OS, therefore may need test script<br> 
+which able to locate and process result dynamically or may need a solution to execute more test case paralell to save time.
 
 ### Advanced Topics
 
 #### What is the difference between CI and CD?
-CD based on CI. CI should compile newly added code, and should perform integration and regression test automated, ease the<br>
-teamwork remotely between team members orchestrating branches, merges and so on. <br>
-CD can be continuous delivery or deployment.<br>
+CD based on CI. CI should compile newly added code, merge different branches, and should perform <br>
+integration and regression test automated, easing the teamwork.<br> 
+Also allowing for team members to orchestrate and control workflow even from different places remotely.<br>
+CD can be continuous -delivery or -deployment.<br>
 If delivery its mean: the product has always a version to deploy, upgrade or to ship (release manually).<br>
 If deployment its mean: the product deployed automated; go live, available to download or upgrade (release automatic).<br>
 CI says: the product is ready to pack.<br>
@@ -418,26 +429,26 @@ C delivery says: the product is packed.<br>
 C deployment says: the product is on the shelf.<br>
 
 #### Describe a Continuous Delivery!
-Developers push their code on different branches, then branches merged back to main. <br>
-Automated test are running to verify the system integration and quality.
-The product ready to deliver.
+Continuous Delivery (CD): is a software engineering approach where developers push their code on different branches<br>, 
+merging back to main in short cycles. <br>
+Automated test are running to verify the system integration and quality. In case test are passed, the product should be<br> 
+stored by version control system in a ready-to-deliver state.<br>
+It aims to build, test, and release software with greater speed and frequency.
 
 #### Compare 2 popular CI systems, one of them should be Jenkins!
+-->
 #### What is Docker, why is it useful?
-Docker is a tool designed to make it easier to create, deploy, and run applications by using containers. Containers allow a developer to package up an application with all of the parts it needs, such as libraries and other dependencies, and ship it all out as one package.
+Docker is a tool designed to make it easier to create, deploy, and run applications by using containers.<br> 
+Containers allow developers to package up an application with every part it needs, such as libraries and other dependencies,<br> 
+and ship it all out as one reusable and cloneable package.
 
-Why:
-
-With Docker, developers can focus on writing code without worrying about the system on which their code will run. Applications become truly portable. You can repeatably run your application on any other machine running Docker with confidence. For operations staff, Docker is lightweight, easily allowing the running and management of applications with different requirements side by side in isolated containers. This flexibility can increase resource use per server and may reduce the number of systems needed because of its lower overhead, which in turn reduces cost.
-consistency, speed and isolation
-By consistency, I mean that Docker provides a consistent environment for your application from development all the way through production– you run from the same starting point every time.
-By speed, I mean you can rapidly run a new process on a server. Because the image is preconfigured and installed with the process you want to run,it takes the challenge of running a process out of the equation.
-By isolation, I mean that by default each Docker container that’s running is isolated from the network, the file system and other running processes.
-Compare 2 popular Test Automation IDE, one of them should be Katalon Studio!
+With Docker, developers can focus on writing code without worrying about the system on which their code will run.<br> 
+Applications become truly portable. Running application using different OS becoming very easy in comparing to set up<br>
+and maintain virtual machines.<br> 
+Different requirements can fulfilled in isolated containers. This flexibility can increase scalability and reusability.<br>
+Consistency and isolation are granted as a result of using every time a copy of image and run it in a container.
+Set up and execution time reduced because the image is preconfigured and installed along every required parts.
+Docker take care of isolation, while by default each Docker container that’s running is isolated from the network.
 
 #### Compare 2 popular Test Automation IDE, one of them should be Katalon Studio!
-
-the process of executing automated tests as part of the software delivery pipeline 
-to obtain immediate feedback on the business risks associated with a software release candidate.
-Continuous testing includes the validation of both functional requirements and non-functional requirements; 
-the scope of testing extends from validating bottom-up requirements or user stories to assessing the system requirements associated with overarching business goals.
+-->
