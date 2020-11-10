@@ -8,35 +8,39 @@ Testing process aiming:
  - to build and improve the overall quality of the product
  - to reduce the possibility of failures caused by internal errors
  - show how the software working under certain conditions.
+ - to verify the system meets with specified requirements.
 <br>
 
 Test process would not:
 - prove that the software working well under every circumstance, 
 - prove that the product is bug and failure free
-- In my opinion, the testing should not make acceptance criteria (except in TDD).
+- validate that the product meets with user needs (but can suggest some hints).
 
 To set up the requirements and to define when meet the product with stakeholders demand (or user demand) is a part of <br>
 the software design. A test can be good, but the program bad, if there are requirement gaps.
 
 #### What is the difference between Defect, Error, Failure?
-Error: can come from many circumstances. <br>
+Error (mistake): can come from many circumstances. <br>
 Developer made a mistake and stay in the code, or some other way the codebase is corrupted, or maybe <br>
 there are design or requirements failure.
+- static test can reveal them.
 
-Defect: an error can lead to failure but not necessary, only certain circumstances lead to failure. <br>
+Defect (bug, fault): an error can lead to failure but not necessary, only certain circumstances lead to failure. <br>
 If the part of the code containing the defect, is executed, or the environment changed it can lead to failure.
+- static test can reveal them.
 
-Failure: the inability of a system or component to perform its required functions.
+Failure (malfunction, issue, incident): the inability of a system or component to perform its required functions.
 - produces an incorrect result or 
 - does not perform the correct action or 
 - does not perform any action. 
+    - dynamic test can find them
 
 #### What are the testing principles?
 1. Testing shows the presence of defects, not their absence.
 2. Exhaustive is impossible. By risk analysis and test techniques focus the test effort.
-3. Shift left - join the testing process early in the software development lifecycle.
+3. Shift left - join the testing process early in the software development lifecycle to save time and money.
 4. Defects cluster together. 80%-20% rule. <br>
-Common experiences that critical parts (20%) containing the most defects (80%).
+Pareto principle, 80-20 rule. The majority of the defects (80%) caused by a few modules (20%).<br>
 5. Pesticide Paradox. Executing the same test does not find more defect. <br>
 (Except regression test. Regression test has a beneficial outcome to execute over and over.)
 6. Testing is context dependent. There is no universal test design pattern for every product.
@@ -44,29 +48,21 @@ Common experiences that critical parts (20%) containing the most defects (80%).
 
 #### What is unit testing? Who is responsible to write unit tests?
 Unit test cover a piece of code on class level. <br>
-Written by usually the developer who is in white-box situation, 
+Written by usually the developer who wrote (and in white-box situation), 
 to ensure that this build block working properly and independently.
 
 #### What are Test Levels, what is the difference between them?
-(component-[/unit-], integration-, system-, acceptance-testing)
-
 Test levels are group of test activities performed in relation with the development lifecycle.
-Grouped by (2.2)
-the objective, 
-the test basis
-the test object
-contextual factors (1.4)
-Requiring suitable test environment.
-1. Unit testing:
+
+1. Component, or Unit testing:
 - The smallest testable portion of code. This kind of testing helps to test each module separately.
-- The aim is to test each part of the software by separating it. 
 - It checks if that component has fulfilled the functionality or not. 
 - This kind of testing is performed by developers.
 
 2. Integration testing:
-Integration means combining. In this testing phase, different software modules are combined and tested as a group<br>
+Integration means combining. In this testing phase, different software modules are combined and tested together as a group<br>
 - To ensure, that newly added module is working properly and ready for system testing.
-- Check the data flow from one module to other modules.
+- To check the data flow from one module to other modules.
 
 3. System testing:
 System testing is performed on a complete, integrated system.<br> 
@@ -75,10 +71,11 @@ System testing is performed on a complete, integrated system.<br>
 - It can involve load, performance, reliability and security test.
 - Often the final test to verify that the system meets the specification. 
 - It evaluates both functional and non-functional testing.
+- The biggest part in automation.
 
 4. Acceptance testing:
-Acceptance test executed to find if the product meet with acceptance criteria.<br> 
-- Basically done by the user, customer or stakeholders. 
+Acceptance test executed to validate if the product meet with acceptance criteria (user needs).<br> 
+- Usually done by the user, customer or stakeholders, manually. 
 
 #### What is the difference between verification and validation?
 Verification: checking whether the system meet with requirements<br>
@@ -110,7 +107,7 @@ This type refers to aspects of the software like scalability or performance, beh
 - Change Related Testing. 
 Called to confirm that defects have been fixed or changes does not result in different behavior.
     - Regression testing focuses on finding defects after a major code change has occurred. 
-    - Continuous testing is the process of executing automated tests as part of the software delivery pipeline 
+    - Continuous testing is the process of executing automated tests as part of the software delivery pipeline (CI/CD).
 
 #### What is the difference between white box, grey boy and black box testing?
 White-box Testing. Tests are written in full access to the test object internal structure or implementation.<br>
@@ -124,10 +121,10 @@ but interacting with the object from the user level .
 #### What is the difference between UAT (User Acceptance Testing) and System testing?
 System test aim to the verification of the system or product behavior and capabilities.<br>
 - how the system perform those tasks (functional), and 
-- how behave during execution (non-functional)
+- how behave while performing those tasks (non-functional)
 
 UAT aim to validate how the product or component fulfill the requirements and how can a user perform processes.
-- how the product fulfill the needs from a user view.
+- how the product fulfill the needs from a user (customer) view.
 
 #### Mention the differences between Regression Testing, Smoke Testing and Retesting?
 Smoke Testing. To prove with minimal effort that the object functional, and in the state for further test process.
@@ -136,7 +133,7 @@ Retesting. After a bug or issue has been fixed, test cases - where this particul
 are re-executed to prove the operation successness. 
  
 Regression Testing. After major changes or upon new versions, changing functionality or capabilities etc.<br>
-To ensure the software has preserved integrity, usability, functionality and capability as before.
+To ensure the software has preserved quality, integrity, usability, functionality and capability as before.
 
 #### What is risk-based testing, what is the point of it?
 RBT aim to prioritize the tests. <br>
@@ -169,72 +166,39 @@ Design, development and test phases following each other in cyclic order.
 
 #### What would you test in case of a simple web shop purchasing function (put items to cart, buy them)? 
 #### Plan and reason your tests.
-White-box Tests:
---> test every method required for a component to fulfill its purpose
-    component: 
-        -cart: 
-            -how set the content:
-                -identifying the product
-                -where and how store it (if store)
-                -how set the rendering information
-                -how pass forward
-        -DB:
-            -how is DB configured:
-                -CRUD operations
-                -input
-                -query
-                -output
+I would make destructive tests to verify:
+ - less than zero item not allowed in basket
+ - checkout with zero item not charge the card or handled properly
+ - that the system can handle more than one identical item
+ - user can remove an item in case he/she changed his/her mind
 
-Functional Tests:
---> test every component about the workflow they supposed to done
-    component: 
-        I would test the cart with amounts: normal, zero, huge and negative 
-        I would test the DB how it handles the incoming data
-    component-integration:
-        I would test how the DB reflect the changes in the cart
-    system:
-        I would test with automated tests how the cart handle the purchase
-    system-integration:
-        I would test with automated tests how the cart pass the purchase to the DB
-    acceptance:
-        I would test with manual tests with user
-
-Non-functional Tests:
---> test every component performance and/or usability apart and together
-    component:
-        cart: 
-            -performance: automated: how the cart capture the input from user and pass it forward
-        DB: 
-            -performance: automated: how DB perform data change
-    component-integration:
-        -usability: manual: how user can handle the process from the step where items are chosen and present in the cart
-    system:
-        -performance: automated: what resource need for a shopping workflow
-            starting from the cart, with a various amount of items
-    system-integration:
-        -performance: automated: what resource need for a shopping workflow
-            starting from the login (or from start page), with a various amount of items
-    acceptance:
-        -usability: manual: how user can handle the process from beginning
-        
-change-related Tests:
---> run automated (except user acceptance) on every change, after a feature is done, or some changes are done
-    component-integration:
-        automated: pipeline with specific branches or test cases
-    system-integration:
-        automated: pipeline with all branches or test cases
-    acceptance:
-        automated: smoke test: complete process from the user view
-        manual: UI test with user
+UI/UX tests should be done to find out:
+ - how a user can handle the process (complicated or easy to use)
+ - if possible any modification (topping on a pizza for example),<br> 
+ these possibilities should get a workaround to verify:
+    - how they effect on the bill (removing, adding...)
+    - are they calculated, displayed, placed properly
+ - how the system threat users:
+    - order available after logout / exit / refresh
+ - is there any notification about the order successfulness / cancellation
+ - is there any notification about extreme amount of items in basket / bill
 
 ### Reporting, Bugs
 
 #### What steps would you follow when you find a defect?
-- Provide clear and specific steps to reproduce the issue.
-- Gather and insert any relevant logs.
-- Describe reproducible test cases, if applicable.
+Should be communicated to the developer in a well documented form:
+- conditions under which this bug is occurring
+- excepted and actual state of operation
+- gather and insert any relevant logs.
+- attach every important circumstances about the system:
+    - OS / platform / browser / software version information
+in order to provide clear and specific steps to reproduce the issue, so the developer can get the exact failure reason.
 
 #### Talk about common test reports, and about their details.
+Test reports should inform stakeholders about the progress of testing process and state of the product.
+Reports should be regular and understandable for non-technical persons, in order to achieve this, should use <br>
+metrics (diagrams, slides etc.) and, a clear informative structure.
+
 - Purpose of the document<br>
 Explain details and activities about the testing performed for the Project
 
@@ -276,102 +240,158 @@ or not after the Exit Criteria was met.
 #### What does a bug report contains?
 - Explanation how exactly the product is broken (how reached-what expected)
 - Information needed to reproduce (and fix) problems and the environment
-- Should be an efficient form of communication between the reporter and receiver
-- A good bug report is filed in a defined way
+- Identified with title and id to be well recognizable
+In order to be an efficient form of communication between the reporter and receiver.
 
 ![bug-report](https://docs.google.com/spreadsheets/d/1MRHpj7wzvbEufmERJ31eT2bz_CJ1E8OK7KgzTsnzWP4/edit#gid=0)
 
 #### How would you prioritize a bug?
 I would considerate the following topics:
-- How does the bug affect the flows in the product.<br>
-(A bug causing a dead footer link vs a bug affecting the user’s payment)
-- The impact that the bug cause.<br>
-(For example a user can’t create a new project in a project management software)
+- How does the bug affect the flows in the product. (A bug causing a dead footer link vs a bug affecting the user’s payment)
+- The impact that the bug cause. (For example a user can’t create a new project in a project management software)
 - What is the estimated number of users who will encounter this bug.
 - How big will the effort to fix the bug.
+- How big will be the impact as long the bug exists.
+
+Common bug severity: 
+ - Blocker: Unless and until fixed, no further process can be done
+ - Critical: Application is crashing or losing data.
+ - Major: Major function affected.
+ - Minor: Minor feature affected.
+ - Trivial: Product can fulfill the purpose, the fault barely noticeable.
+ - Enhancement: Recommendation or idea to enhance the system.
 
 ### Test Automation, Selenium
 
 #### Which test cases should be automated and which shouldn't?
-Repeatedly executed test cases may be automated, like regression, (continuously adjusted) integration and system tests.
-Test cases where same workflow can be applied and parameterized for big data input even at unit test level. DDT.
-Performance and load tests may be automated.
-Tests if execution taking a long time should be automated to maximize the efficiency.
-Cross-platform and cross-browser tests definitely fall under automated category.  
+- Repeatedly executed test cases may be automated, like regression, (continuously adjusted) integration and system tests.
+- Test cases where same workflow can be applied and parameterized for big and/or different data input even at unit test level. DDT.
+- Performance and load tests may be automated.
+- Tests if execution taking a long time should be automated to maximize the efficiency.
+- Cross-platform and cross-browser tests definitely fall under automated category.  
+- CI/CD processes
+- GUI / API
+
+In case the construction take more expenses than the benefit of automation NOT:
+- the UI / feature / logic may vary a lot
+- outcome not predictable
+- test case executed once or very rarely (except for example system test)
+- making automation make no sense because of complexity or goal (e.g.: jira project setup)
 
 #### Describe a good automated test!
-A good automated test in my opinion is simple, modular, robust and reliable, maintainable, well documented and independent.
+A good automated test in my opinion is simple, modular, robust and reliable, maintainable, well documented and independent<br>,
+and created for a reasonable purpose.
 
 #### What is Selenium, Selenium IDE, Selenium WebDriver?
-Selenium is the framework, 
-IDE is a direct js implementation to interact a browser, can record and automate tests, speak with the browser on selenese,
-WebDriver is the successor of RemoteControl, accept instructions on selenese or through the client API, has implementation 
-in java, python, php, ruby, c#
+Selenium is an open source framework. Made to carry out automated tests on web applications.<br>
+Selenium is developing since 2004, by Jason Huggins and Paul Hammant and others.<br> 
+The tool is composed of more components, IDE, WebDriver and Grid.<br>
+ 
+IDE: is a direct js implementation to interact with a browser, can record and playback tests, <br>
+and use a domain specific language: selenese.
 
-#### How can be web elements indentified?
-They can be identified through the html they reside. ID, class, name, tag, linkText, partialLinkText, cssSelector and xPath.
-WebDriver capable to scan through the html source, and find an element through one of it's attributes or directly 
+WebDriver: is a portable cross platform and multilingual application. The successor of Remote Control.<br> 
+Accept instructions through the client API, has implementation in java, python, php, ruby, c#, <br>
+running under windows and unix like systems (MacOS, Linux).
+
+#### How can be web elements identified?
+They can be identified through the html they reside. ID, class, name, tag, linkText, partialLinkText, cssSelector and xPath.<br>
+WebDriver capable to scan through the html source, and find an element through one of its attributes or directly<br> 
 through the place with xpath.
 
 #### How can you wait for elements, what can go wrong? Collect possible errors and root causes.
-Explicit and implicit and fluent waits are applicable. 
-Implicit wait applicable on a script, giving a fixed amount of time in between the script should finish or fail.
-Explicit wait is the most common used class (on my side), it can be equipped with an object to wait and a circumstance
+Explicit and implicit and fluent waits are available.<br> 
+
+Implicit wait applicable on a script, giving a fixed amount of time to the script to finish or should fail.
+```java
+    driver.manage().timeouts().implicitlyWait(int amountOfWait, TimeUnit.Type);
+```
+
+Explicit wait is the most common used class (on my side), it can be equipped with an object to wait, and a circumstance
 how to wait for it.
-Fluent wait is a kind of marriage from the above two but with extra features. It can be configured how long to wait, 
-the frequency to check the condition and a condition how to find the element.
+```java
+    WebDriverWait wait = new WebDriverWait(WebDriver, Duration.ofTimeout());
+    WebElement element = wait.until(ExpectedCondition.type);
+```
+
+Fluent wait is a kind of explicit wait, with the extra feature to configure the frequency to check the condition. 
+```java
+    FluentWait<WebDriver> webDriverWait = new FluentWait<WebDriver>(WebDriver)
+                                                 .withTimeout(Duration.ofSeconds(30))
+                                                 .pollingEvery(Duration.ofSeconds(5))
+                                                 .ignoring(NoSuchElementException.class);
+```
 
 The most commons are:
 
-NoSuchElementException - the given search context does not find the element, root can be typo or the classifier does not exist.
-StaleElementException - the stored element reference has been refreshed, maybe the page was reloaded or some js has modified it after it was found firstly.
-TimeOutException - some not specified problem has occurred and the given time amount to find an element has expired without success.
+NoSuchElementException - the given search context does not find the element, root can be typo, or the classifier does not exist.
+StaleElementException - the stored element reference has been refreshed, maybe the page was reloaded, or some js has modified it after it was found firstly.
+TimeOutException - some not specified problem has occurred, and the given time amount to find an element has expired without success.
 ElementNotInteractableException - for some reason the element found, but command not applicable on it.
 ElementNotVisibleException - for some DOM effect the element is found in source but not visible.
-WebDriverException - some action tried to performed after driver has been closed.
+WebDriverException - a process try to perform an action after driver has been closed.
 
 #### Compare POM and Keyword Driven Testing!
-POM
-stores the test object in a form of an object. 
-As an object it is also can be equipped with some or more methods to interact with the elements.
-From the AUT abstracted object -> page object modell
-tester should interact with the site through the POM model
+POM:
+A design pattern to create an Object repository from web UI elements.<br> 
+Every page should have a corresponding object repository, the repository could use the PageFactory to find those elements<br>
+and should contain the methods to interact with the elements.<br>
+This construction should abstract an API in order to allow the interaction but separate the different layers, namely<br>
+the repository and logic from the actual test cases.<br> 
+This pattern make tests more readable, modular, reusable, independent and maintainable.
 
-Reusability: as the elements belongs to the site one POM is not usable for many sites.
-    With proper designing the POM can be modular so methods are reusable after the specific POM has been created. 
-Maintainability: easy to maintain as the elements and methods reside in one class (or more clearly separated classes)
+KDT:
+This is scripting technique; using an extensible library where keywords representing the actions and scripts,<br>
+which defining the actual procedure to operate with elements, like a key - value pair dictionary.<br>
+This technique separate logic from test scenario, which make the process declarative and procedures reusable.<br>
+Using keywords (similar to BDD) test cases can be written by no- or low programming skills, making test cases<br>
+more readable for stakeholders and make test case build process faster.
 
-KDT
-is an extensible library to operate with webDriver on a page.
-methods are stored as key - value pairs, where 
-key: is a string which is called
-value: is a method reference which is executed after calling the proper keyword.
+#### What is the difference between TDD and BDD?
+TDD:
+Test Driven Development is a software development process and very closely coupled with AGILE methodology.<br> 
+The development done in cycles:
+- First the test case is written. 
+- Then run test and develop code till all green. 
+- Finally, refactoring.
 
-Reusability: keywords and the belonging library are widely usable with the proper element location strategy very powerful
-    tool to quick set up and interact with browser
-Maintainability: as common library for eventually more test project, it is easy to mess up with the keywords.
+At the end of the cycle, the feature should be developed and cycle can begin again;
 
-#### Whats the difference between TDD and BDD?
-TDD is very closely coupled with AGILE methodology. The development done in cycles.
-First the test case is written. Then run test and refactor till all green: the feature is developed;
-
-BDD is a very user friendly or stakeholder friendly approach to specify the requirements. A living language,
-based on keywords, such as: Given, When, Then.
+BDD:
+Behavior Driven development is kind of declarative TDD with a taste of KDT.<br>
+A living language, based on keywords, such as: Given, When, Then.<br> 
+Common in TDD as specifies the requirements and design the scenario before any line code may be written, but<br>
+easier to understand for such outsiders like stakeholders or non-technical staff.<br>
+Also make possible to write scenarios without programming skills and make test cases and sentences reusable.
+Well structured architecture make tests more readable and maintainable.
 
 #### What is API testing and why would you use that?
-Calls on the API endpoints then compare the raw data with the rendered one.
+API testing is a type of software testing APIs involved directly to verify product functionality, reliability,<br> 
+performance, and security. Since APIs lack of GUI, API testing is performed at the message layer on a higher speed.
 
-Personally I am using API calls to ensure that the data provided by the site are corrects. 
-With that approach can be said if the site and browser render correctly the given data.
-It is not good to verify that the application bringing the correct behaviour or using the proper logarithm. 
+Earlier Testing - Increased Development Progress<br>
+Tests can be built after module has finished and before GUI developed to validate the correctness of responses and data.
 
+Easier Test Maintenance<br>
+API changes are much more controlled and infrequent than UI changes.<br> 
+
+More Reliable and Robust<br>
+Accessing web elements can be difficult and may vary a lot depends on the browser, device and screen orientation. 
+API test bring a constant result.
+
+Faster Time To Resolution<br>
+API tests derive exact information about defects. This helps reduce time spent on finding and fixing bugs.
+
+Speed and Coverage of Testing<br>
+Without graphical process, execution run faster.
+ 
 #### What is Data Driven Testing and why is it useful?
-The tests are organized around a various situations, with many inputs.
-Extremely ideal approach for input fields, or any point where user able to handle data to the application.
-Or when is needed the AUT to being tested under various circumstances.
+DDT is a methodology that design test scripts and test input into a framework.<br>
+
+The tests are organized around various situation, with many inputs.
+
 
 Data can be stored in text file, cvs, excel... 
-The testmethod then run as a suite as many times as many data has found.
 
 #### What are the challenges and best practices with dynamically loading web elements?
 WebDriver has an extremely useful tool, the WebDriverWait class. With it's wait library.
@@ -404,6 +424,17 @@ The product ready to deliver.
 
 #### Compare 2 popular CI systems, one of them should be Jenkins!
 #### What is Docker, why is it useful?
+Docker is a tool designed to make it easier to create, deploy, and run applications by using containers. Containers allow a developer to package up an application with all of the parts it needs, such as libraries and other dependencies, and ship it all out as one package.
+
+Why:
+
+With Docker, developers can focus on writing code without worrying about the system on which their code will run. Applications become truly portable. You can repeatably run your application on any other machine running Docker with confidence. For operations staff, Docker is lightweight, easily allowing the running and management of applications with different requirements side by side in isolated containers. This flexibility can increase resource use per server and may reduce the number of systems needed because of its lower overhead, which in turn reduces cost.
+consistency, speed and isolation
+By consistency, I mean that Docker provides a consistent environment for your application from development all the way through production– you run from the same starting point every time.
+By speed, I mean you can rapidly run a new process on a server. Because the image is preconfigured and installed with the process you want to run,it takes the challenge of running a process out of the equation.
+By isolation, I mean that by default each Docker container that’s running is isolated from the network, the file system and other running processes.
+Compare 2 popular Test Automation IDE, one of them should be Katalon Studio!
+
 #### Compare 2 popular Test Automation IDE, one of them should be Katalon Studio!
 
 the process of executing automated tests as part of the software delivery pipeline 
