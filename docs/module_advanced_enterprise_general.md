@@ -376,9 +376,17 @@ association - aggregation - composition
 multiplicity
 
 #### What kind of design patterns do you know? Bring at least 3 examples.
-singleton
-dao
-pom
+ - Creational Design Pattern
+    - Singleton
+    - Factory (Simplified Factory Design, Factory Design, Abstract Factory)
+    - Object Pool
+    
+ - Behavioural Design Pattern
+    - Template Method (-> abstract)
+    - Null Object (-> Optional like)
+    
+ - Structural Design Pattern
+    - Decorator
 
 #### What is the purpose of the Iterator Pattern?
 Definition:
@@ -400,12 +408,13 @@ Dependency Inversion Principle. -> modules, layers depends on each through inter
 #### How would you separate data storage code and business logic code (which uses stored data) in an application?
 With layered architectural technique, interface, dependency injection
 e.g. DAO pattern is a good solution for separating them
+MVC - Model - View - Controller programming paradigm.
 
 ## Computer science
 
 ### Data Structures
 #### What is the difference between Stack and Queue data structure?
-Stack is a kind of queue both are a kind of a collection.
+Stack is a kind of queue both are a kind of collection.
 
 Stack: elements are added to the top of the stack and the next element also coming from the top of the stack. FILO 
 Queue: elements are added to the end of the stack and the next element coming from the top. FIFO
@@ -415,12 +424,12 @@ Queue: elements are added to the end of the stack and the next element coming fr
 #### What is a graph? What are simple graphs? What are directed graphs? What are weighted graphs?
 An abstract data type. A set of points (nodes) and lines connecting them (edges).
 
-- Simple graph: where all the nodes are connected, and connected only once, with one edge.
+- A simple graph: where all the nodes are connected, and connected only once, with one edge.
 
-- Directed graph: where edges associated with a direction, int hat case an edge between 
+- A directed graph: where edges associated with a direction, int hat case an edge between 
 A - B is not equal to B - A.
 
-- Weighted graph: where the edges have a label, represent a value (length, weight, price etc...) which is the cost of the edge.
+- A weighted graph: where the edges have a label, represent a value (length, weight, price etc...) which is the cost of the edge.
 
 #### What are trees? What are binary trees? What are binary search trees?
 Tree is a special graph, directed and simple, one node representing the root,
@@ -512,7 +521,7 @@ else will block after and correspond to the preflight response.
 #### How can you initialize a CSRF attack?
 Cross Site Request Forgery.
 
-If somebody place a malicious script and stole a cookie (or different credential) then send the malicious content
+If somebody places a malicious script and stole a cookie (or different credential) then send the malicious content
 from the script with the stolen cookie from a trusted site with valid identification to somewhere.
 
 #### What is JWT used for? Where to store it on client side?

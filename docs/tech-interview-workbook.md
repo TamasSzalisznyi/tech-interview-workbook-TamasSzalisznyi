@@ -1047,7 +1047,66 @@ conquer and rule
 ##When to use AJAX? Bring examples.
 ##What is SOA? When to use?
 ##What kind of HTTP status codes do you know?
+**1xx informational response** – 
+>the request was received, continuing process
+
+**2xx successful** – 
+>the request was successfully received, understood, and accepted
+
+>**200 OK** — This is most commonly used HTTP code to show that the operation performed is successful.<br>
+**201 CREATED** — This can be used when you use POST method to create a new resource.<br>
+**202 ACCEPTED** — This can be used to acknowledge the request sent to the server.<br>
+
+**3xx redirection** – further action needs to be taken in order to complete the request
+
+**4xx *client error*** – the request contains bad syntax or cannot be fulfilled
+>**400 BAD REQUEST** — This can be used when client side input validation fails.<br>
+>**401 UNAUTHORIZED / 403 FORBIDDEN** — This can be used if the user, or the system is not authorised to perform certain operation.<br>
+>**404 NOT FOUND** — This can be used if you are looking for certain resource and, it is not available in the system.<br>
+
+**5xx server error** – the server failed to fulfil an apparently valid request
+>**500 INTERNAL SERVER ERROR** — This should never be thrown explicitly but might occur if the system fails.<br>
+>**502 BAD GATEWAY** — This can be used if server received an invalid response from the upstream server.
+
 ##What is a REST API?
+**REST is a client-server architecture.**
+
+Uniform Interface
+Stateless
+Cacheable
+Client-Server
+Layered System
+Code on Demand
+
+The *client and the server* both have a different set of concerns. <br>
+The server stores and/or manipulates information and *makes it available* (API) to the user in efficient manner. <br>
+The client takes that information and displays it to the user and/or uses it to perform subsequent requests for information. <br>
+This *separation of concerns* allows both the client and, the server to: <br>
+>evolve *independently* as it only requires that the interface stays the same.
+
+REST is stateless. <br>
+That means the communication between the client, and the server always 
+>contains all the information needed to perform the request. 
+>There is no session state in the server, it is kept entirely on the client's side. 
+>If access to a resource requires authentication, then the client needs to authenticate itself with every request.
+
+REST is cacheable. <br>
+The client, the server and any intermediary components can all cache resources in order to improve performance.
+
+REST provides a uniform interface between components. <br>
+This simplifies the architecture, as all components follow the same rules to speak to one another. <br>
+It also makes it easier to understand the interactions between the different components of the system. <br>
+
+REST is a layered system. <br>
+Individual components cannot see beyond the immediate layer with which they are interacting. <br>
+This means that a client connecting to an intermediate component, like a proxy, has no knowledge of what lies beyond. <br>
+This allows components to be independent and thus easily replaceable or extendable.
+
+REST optionally provides code on demand. <br>
+Code may be downloaded to extend client functionality. <br>
+This is optional however because the client may not be able to download or run this code, and so a <br>
+REST component cannot rely on it being executed.
+
 ##What is JSON? When to use?
 ##What is TCP/IP? What layers does it define, what are they responsible for?
 ##What’s the difference between TCP and UDP?
