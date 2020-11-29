@@ -5,11 +5,25 @@
 ### Clean code
 
 #### Point out 5 suggestions, how to format an SQL query!
- 1. descriptive related but different database and table names
- 2. keywords and expressions are aligned into separate columns
- 3. indented new line after every logical step
- - query parameters indented to create a block like body
- - commas are at the end of the line
+ 1. descriptive, related ,different and consequent database and table names
+ Breaking down long queries into smaller pieces with:
+ 2. creating code blocks with logical steps in new lines
+ 3. code blocks intended after keywords
+ 4. separating language elements from parameters and table, column/names with usage of
+ upper case letters and lower case letters
+ 5. using comments to explain steps
+  
+  ```postgresql
+/*Get the list of every student who failed or was absent on exam*/
+ 
+SELECT name, 
+      student_group,
+FROM course_marks
+WHERE points &amp;lt; 300 OR points IS NULL; 
+--student fails when gets 300 or less points.
+--When student was absent, instead of points there is NULL in column
+```
+-->
 
 #### What layers can you name in a simple web application?
 Layered architecture is a client–server architecture
@@ -22,15 +36,16 @@ Layered architecture is a client–server architecture
 ### Error handling
 #### What error can occur, when an array does not have an element on the requested index?
 Index error.
+
 #### What is the “finally” block, and how would you use it?
-Finally block is a block that is used to execute important code. E.g.: closing connection. <br
-Finally block is always executed whether exception is handled or not. <br
-Finally block follows try or catch block.
+Finally-block, is a block that is used to execute important code. E.g.: closing connection. <br>
+This block is always executed whether try was successful or not. <br>
+Finally block follows try, and catch block.
 
 #### Why should we catch special exception types?
 In general, an exception breaks the normal flow of execution and executes a pre-registered exception handler.
 
-To point to using an exception handler is to keep running the code in cases which are "minor" problems from a view <br
+The point to using an exception handler is to keep running the code in cases which are "minor" problems from a view <br>
 of the program:
  - to avoid a bad input that can broke the consistency of the code
  - to avoid an index error with limiting the steps for the user
@@ -39,22 +54,28 @@ Or to prevent some mayor problem. For example: important sequences should proper
  - misspelling or
  - harmful injections
 
-can be handled with exception in the case that the code can not accept just the right one.
+can be handled with exception forcing the user to retry the input or breaking the code in early stage.
 
 ### Security
 #### What is SQL injection? How to protect an application against it?
-SQL Injection (SQLi) is a type of an injection attack that makes it possible to execute malicious SQL statements.
-Prevent SQL Injection attacks with input validation and parametrized queries with prepared statements: do not use the input directly.
-Also sanitizing all input e.g.: remove potential malicious code elements such as single quotes and other special characters. 
-Turning off the visibility of database errors on production sites. 
+SQL Injection (SQLi) is a type of injection attack, that makes it possible to execute malicious SQL statements.<br>
+To protect the application, one can:
+
+**- Prevent SQL Injection attacks** <br> with input validation and parameterized queries with prepared statements: <br>
+ to prevent the use of input directly.
+
+**-** or **sanitizing all input** e.g.: remove potential malicious code elements such as single quotes and other special characters. 
+
+-Turning off the visibility of database errors on presentation layer. 
 
 #### What is XSS? How to protect an application against it?
 Cross-site script injection.
 Most of all:
- -   Context-sensitive server side output encoding<br>
+ - Context-sensitive server side output encoding <br>
 and:
- -   Input validation or data sanitization.
+ - Input validation or data sanitization.
  - Using safe JavaScript APIs
+-->
 
 #### How to properly store passwords?
 In at least hashed form. Or hashed and salted.
@@ -70,40 +91,64 @@ To transform a given character collection (data) to a fixed length character col
 where the hashed output should be the same with every time from the same input. One way encryption.
  
 #### What is the difference between encryption and hashing? When would you use which?
-<b>Encrypting</b> is done by a key, reversible; with the same key it can be decrypted. Length hang from the source length.
-Used in cases when the content is also important and needed, possible to transfer it in a secure way.<br>
-<b>Hashing</b> is irreversible, one way transformation, the lenght is fixed by the algorithm.
-Used when knowing or using the source - AKA the content - isn't in focus.
-  
+**Encrypting** is:
+ - done by a key. Reversible; with the same key it can be decrypted. <br>
+ - length hangs from the source length.
+ - used in cases when the content is also important and needed, possible to transfer it in secure way.<br>
+
+**Hashing** is :
+ - irreversible, one way transformation
+ - the length of the hashed object usually shorter than the origin, and fixed by the algorithm.
+ - Used when knowing or using the source - AKA the content - isn't in focus. 
+     - data tables indexing performance improvement: 
+        - the shorter, hashed version is faster than comparing with longer key
+        - comparing fixed-length keys allows the algorithm to operate more reliably and safely
+    - storing passwords in hashed form prevent the reveal of the original password even if the database is corrupted
+     
 #### What encryption methods do you know?
 Symmetric and asymmetric.
+-->
 
 #### What hashing methods do you know?
 Division reminder, folding, radix transformation, digit rearrangement.
 
 #### How/where would you store sensitive data (like db password, API key, ...) of your application?
-Hided from publicity.
+Hided from publicity, separate from other datas.
 
 ## Computer science
 
 ### Algorithms
 
 #### What is the difference between Stack and Queue data structure?
-Stack data structure have just one pointer, adding operation (push) or removing operation (pop) take place from the <br
-top of the list, where the pointer is.
+Stack data structure have just one pointer, adding operation (push) or removing operation (pop) take place from the <br>
+top of the list, where the pointer is.<br>
 Principle: LIFO (Last In First Out)
 
 Queue have two pointers. One for each side of the list. The front side can take a new operation (enqueue), <br> 
-to remove (dequeue) an operation the pointer should use the the rear side.
+to remove (dequeue) an operation the pointer should use the rear side.<br>
 Principle: FIFO (First In First Out) 
 
 #### What is BubbleSort? Describe the main logic of this sorting algorithm.
-BubbleSort is a sorting method. Starting from the first element, comparing it with the next. If the next element 
-higher then the previous move to the next. Else swap them. And so on till the last index.
+BubbleSort is a sorting method. Starting from the first element, comparing it with the next.<br>
+If the next element higher than the previous move to the next. Else swap them, and so on till the last index.
+The algorithm has O(n^2) complexity as the logic has to be repeated for every element for the total length of the array.
 
 #### Explain the process of finding the maximum and minimum value in a list of numbers!
-Moving along the collection (iterate). Set the first as highest/lowest. Then comparing each next element with the
-firts and replace it with the first accordingly.
+The process is:
+- Moving along the collection (iterate) once. 
+- Set the first as highest/lowest, say min and max.
+- Then comparing each next element with the min/max value and replace it accordingly.
+- Every time if the actual value higher than max, or lower than min, replacing them continuously<br>
+ will find the minimum and maximum values for the end of the array.
+
+```python
+    min, max = array[0]
+    for i in array:
+        if array[i] < min:
+            min = array[i]
+        elif array[i] > max:
+            max = array[i]
+```
 
 #### Explain the process of calculating the average value in an array of numbers!
 Adding each element value together and dividing it with the the total element count.

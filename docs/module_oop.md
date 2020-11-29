@@ -10,7 +10,7 @@ Fail fast is a programming design; a code tries to fail as soon as possible at v
 When exception occur it is not handled silently or with default values 
 because there is a chance then that the error will show up later when harder to trace back.
 
-It should decreases the internal software entropy, and reduces debugging effort.
+It should decrease the internal software entropy, and reduces debugging effort.
     
 ## Computer Science
 
