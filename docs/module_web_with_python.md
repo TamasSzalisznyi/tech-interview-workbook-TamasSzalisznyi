@@ -462,12 +462,27 @@ resulting in:
 | Gray |
 | Red |
 
+#### Difference between WHERE and HAVING clauses.
+The fundamental difference between WHERE and HAVING is this: 
+    
+**- WHERE** *selects input rows before groups and aggregates are computed*<br> 
+- it controls *which rows go into the aggregate computation*
+- the WHERE clause must not contain aggregate functions 
+(it makes no sense to try to use an aggregate to determine which rows will be inputs to the aggregates.) 
+    
+**- HAVING** *selects group rows after groups and aggregates are computed*.<br> 
+- HAVING clause always contains aggregate functions. 
+- HAVING clause that doesn't use aggregates -> WHERE stage
+- behaving as a filter function
 
 #### What are aggregate functions in SQL? Give 3 examples.
 An aggregate function performs a calculation on a set of values, and returns a single value.
-- MAX()
-- SUM()
-- AVG() 
+
+- MAX(expression) - return the highest value from expression specified rows
+- MIN(expression) - return the lowest value from expression specified rows
+- SUM(expression) - return the total value from expression specified rows
+- AVG(expression) - return the average value from expression specified rows
+- COUNT(*) / COUNT(expression) - return the number of all rows / number of rows where expression true
 
 #### What kind of JOIN types do you know in SQL? Could you give examples?
 - (INNER) JOIN:
