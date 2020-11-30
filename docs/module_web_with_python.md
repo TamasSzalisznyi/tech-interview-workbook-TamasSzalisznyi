@@ -107,6 +107,12 @@ where the hashed output should be the same with every time from the same input. 
      
 #### What encryption methods do you know?
 Symmetric and asymmetric.
+
+Symmetric: AES (Rijndael), DES (TripleDes), Twofish (Blowfish)
+s-box. cycles.
+
+Asymmetric: RSA, SHA
+modulus, big primes
 -->
 
 #### What hashing methods do you know?
@@ -132,6 +138,15 @@ Principle: FIFO (First In First Out)
 BubbleSort is a sorting method. Starting from the first element, comparing it with the next.<br>
 If the next element higher than the previous move to the next. Else swap them, and so on till the last index.
 The algorithm has O(n^2) complexity as the logic has to be repeated for every element for the total length of the array.
+```python
+    array = [8, 1, 4, 7, 2, 3, 9]
+    for i in range(len(array)):
+        for j in range(len(array)):
+            if array[i] > array[j]:
+                swap = array[j]
+                array[j] = array[i]
+                array[i] = swap
+```
 
 #### Explain the process of finding the maximum and minimum value in a list of numbers!
 The process is:
@@ -142,8 +157,9 @@ The process is:
  will find the minimum and maximum values for the end of the array.
 
 ```python
+    array = [1, 2, 3, 4, 5, 6, 7, 8]
     min, max = array[0]
-    for i in array:
+    for i in range(len(array)):
         if array[i] < min:
             min = array[i]
         elif array[i] > max:
@@ -152,11 +168,21 @@ The process is:
 
 #### Explain the process of calculating the average value in an array of numbers!
 Adding each element value together and dividing it with the the total element count.
+```python
+    array = [1, 2, 3, 4, 5, 6, 7, 8]
+    sum = 0    
+    for i in range(len(array)):
+        sum += array[i]
+    
+    average = sum / len(array)
+```
  
 #### What is Big O complexity? Explain time and space complexity!
-Big O Notation is to describe the complexity of an algorithm. How long an algorithm takes to run. 
-It is to compare the efficiency of different approaches to a problem. Big O express the runtime as it grows relative to the input, 
-as the input gets larger.
+Big O Notation is to describe the complexity of an algorithm. How much computation needed to perform an action, <br>
+so how long an algorithm takes to run.<br> 
+It is to compare the efficiency of different approaches to a problem.<br>
+Big O express the runtime as it grows relative to the input, as the input gets larger.
+Typicals are: O(1), O(n), O(n^2), O(log(n))
 
 #### Explain the process of calculating the average value in a linked list of numbers!
 Similar to the average counting of an array. We have to move along each nodes and adding together the values, than
@@ -164,7 +190,19 @@ dividing them with the total nodes count.
 
 ### Procedural
 #### How the CASE condition works in SQL?
-CASE is a program-flow controlling structure, like the ```if```  in other programming language.
+CASE is a program-flow controlling structure, like the ```if - else if - else```  in other programming language.
+Working in a form of CASE - WHEN - THEN - ELSE
+
+```postgresql
+    CASE expression
+        WHEN value_1 THEN result_1
+        WHEN value_2 THEN result_2 
+        [WHEN ...]
+    ELSE
+        else_result
+    END
+```
+CASE is an expression, can use it with SELECT, WHERE, GROUP BY, and HAVING clause.
 
 #### How the switch-case condition works in JavaScript?
 ```Switch``` is the expression which is compared with the ```case``` clause(s). Optional an else branch can also be implemented.
@@ -173,7 +211,7 @@ This is an ```if-else``` construction, the right side of comparison is not repea
 #### How to achieve a switch-case-like structure in Python?
 With a dictionary. After implemented the expression should be the key, with the
  ```dictionary.get(expression, default_returning_value)``` dictionary method and the values are the clauses.
-The default  returning value role as else branch.
+The default returning value role as else branch.
 
 #### Explain variable scoping in Python!
 According to the LEGB rule: local, enclosing, global, built-in, the look-up for the namespaces are started from the most inner scope:
@@ -188,30 +226,70 @@ the value is immutable, can't be reassigned  after declaration.
 List comprehensions consist of an iterable containing an expression followed by a for clause. 
 This can be followed by additional for or if clauses. Like lists it supposed to use the square brackets.
 
+syntax: `[expression for item in list]`<br>
+
+`matrix = [[x for x in range(4)] for y in range(4)]`<br>
+
+should print:
+```
+[[0, 1, 2, 3]
+[0, 1, 2, 3]
+[0, 1, 2, 3]
+[0, 1, 2, 3]]
+```
+
 #### How the “ternary expression” looks like in Python?
-`a += 1 if b % 2 else 2`
-See below:
-`statement | true ? false`
+Conditional expression.
+
+Syntax: `<expression1> if <condition> else <expression2>`<br>
+
+```python
+n = 5
+print("Even") if n % 2 == 0 else print("Odd")
+# >>> Even
+```
 
 #### How the ternary expression looks like in JavaScript?
-`statement | true ? false`
+Syntax: `statement ? true : false`
+
+```javascript
+function getFee(isMember) {
+  return (isMember ? '$2.00' : '$10.00');
+}
+
+console.log(getFee(true));
+// output: "$2.00"
+
+var age = 26;
+var beverage = (age >= 21) ? "Beer" : "Juice";
+// output: "Beer"
+```
 
 #### How to import a function from another module in Python?
-With the ```[from module] import module_name``` than calling the function with ```module_name.function_name```
+With the `import` keyword, in the form of:<br>
+
+`[from module] import module_name` 
+
+then the function is callable in the form of:<br>
+
+`module_name.function_name`
 
 #### How to import a function from another module in JavaScript?
 With 
 ```javascript
-import name from "module-name";
-import { member } from "module-name";
-import "module-name";
+import functionName from "moduleName"; //or
+
+import { member } from "moduleName"; //or
+
+import "moduleName";
 ````
-than calling the function with ```module_name.function_name```
+than calling the function with:<br>
+ 
+ ```moduleName.functionName```
 
 ### Functional
 #### What is recursion?
-Recursive in functions mean: that the function call itself again at the end of the execution with value(s) what is/are defined by itself.
-Can be other meanings too, e.g.: copying or deleting a folder in a recursive way will delete/copy the sub folders too.
+Recursive in functions mean: that the function call itself again at a point of the execution.
 
 #### Write a recursive function which calculates the Fibonacci numbers!
 ```javascript
@@ -226,21 +304,103 @@ Can be other meanings too, e.g.: copying or deleting a folder in a recursive way
     
     fibo(30);
 ```
+
 #### How to store a function in a variable in Python?
 With assigning it to a variable.
 The returning value from a function can be stored in a variable or
 the function can be called via a variable which is assigned to the function declaration.(definition)
 
 #### List the ways of defining a callable logical unit in JavaScript!
-- normal functions can be called directly
-- as property of an Object, call it as Object method  
-- generator functions
-- arrow functions
+- Normal functions can be called directly.
 
-As constructors: you can invoke functions as constructors, via the new operator.
+```javascript
+function doSomething(param) {
+    console.log(param)
+}
+doSomething("I'm called directly");
+```
+
+- As property of an Object, call it as Object method.  
+
+```javascript
+const anObject = {
+    doSomething : function(param) {
+        console.log(param)
+    }
+}
+
+anObject.doSomething("I'm a property of anObject")
+```
+
+- Generator functions.<br>
+These functions are returning with an iterator, calling this iterator `next()` method will `yield` the predefined value, <br>
+and a boolean value; <br>
+`{ value: ..., done: ... }` <br>
+`True` until the iterator has more elements and `False` after it reached the `return` statement.<br>
+Syntax is: `function*`<br>
+Keyword is `yield`
+
+```javascript
+function* generatorFunction() {
+    yield "This is the first return"
+    console.log("First log!")
+    yield "This is the second return"
+    console.log("Second log!")
+    return "Done!"
+}
+
+const myGenerator = generatorFunction()
+myGenerator.next()
+//output: 
+//{value: "This is the first return", done: false}
+
+myGenerator.next()
+//output:
+//First log!
+//{value: "This is the second return", done: false}
+
+myGenerator.next()
+//output:
+//Second log!
+//{value: "Done!", done: true}
+```
+
+- Arrow functions.<br>
+These functions have a wide variety to use: parentheses, method body, return statement can be omitted in particular circumstances.
+A basic example:
+```javascript
+// Traditional Function
+function (a, b){
+  return a + b + 100;
+}
+
+// Arrow Function
+(a, b) => a + b + 100;
+```
+>Arrow functions return value can be stored in variables, 
+`let bob = a => a + 100;`<br>
+>can be used in place to do some work or be nested under other function.
+ 
+- As constructors.<br>
+ Functions can be invoked as constructors, via the new operator.
+```javascript
+class Polygon {
+    constructor() {
+        this.name = 'I'm a Polygon';
+    }
+}
+
+const polygon = new Polygon();
+
+console.log(polygon.name);
+//output: "I'm a Polygon"
+
+```
+
 #### What is an event listener? How to attach one?
-Event listeners give functionality to the application. Trough them can be triggered a function by the user.
-Locating the target, attaching a listener function and in the callback handling the event with an event handler function.
+Event listeners give functionality to the application. Trough them can be triggered a function by the user.<br>
+Locating the target, attaching a listener function and (in place with arrow or in the callback)<br>
+handling the event with an event handler function.
     
 - Locating:
     - object: `window` or `document`
@@ -277,7 +437,7 @@ async: load of the page and the script started parallel, script executed right a
 
 #### How can you connect your application to a database server? What are the possible ways?
 I need a connection string and a connection object from the database provider to set a session with the database server.
-For phyton we can use the psycopg2 module api's to connect an application with psql database.
+For Python we can use the psycopg2 module's api to connect an application with psql database.
 
 #### When do you use the DISTINCT keyword in SQL?
 DISTINCT clause is used in the SELECT statement to remove duplicate rows from a result set. 
