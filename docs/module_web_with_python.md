@@ -440,7 +440,28 @@ I need a connection string and a connection object from the database provider to
 For Python we can use the psycopg2 module's api to connect an application with psql database.
 
 #### When do you use the DISTINCT keyword in SQL?
-DISTINCT clause is used in the SELECT statement to remove duplicate rows from a result set. 
+The keyword is used to select only **unique values** from a specified column(s) in a database table.<br>
+
+| Car Brand | Model |	Year | Color |
+:---: | :------: | --- | --- |
+| Toyota | Camry XLE | 2005 | Gray |
+| Honda | Accord EX | 2002 | Black |
+| Lexus | ES 350 | 2008 | Gray |
+| BMW |	3 Series Coupe | 2008 |	Red |
+
+```postgresql
+SELECT DISTINCT 
+    Color
+FROM Cars
+```
+resulting in:
+ 
+| Color |
+| --- |
+| Black |
+| Gray |
+| Red |
+
 
 #### What are aggregate functions in SQL? Give 3 examples.
 An aggregate function performs a calculation on a set of values, and returns a single value.
