@@ -33,6 +33,11 @@ Linked list is a data structure which hold the values in a field and a pointer t
 Floyd's cycle say: 
 starting with two pointers, one is faster than the other, if they met, there is a loop in the list.
     
+My approach would be:
+If we store the reference from the first node of the linked list, and call a next() method from the last node,
+then it should return with false for hasNext(). If this so then the linked list isn't looped. 
+If returning with a Node then the linked list looped, especially if the returned node is equal to the stored node.
+
 #### What is the Big O time complexity of the common operations in an ArrayList, LinkedList, HashMap? And of a bubble sort, quicksort, finding items in a Binary Search tree?
 ArrayList: get O(1), search O(n), insert O(n), delete O(n)
 LinkedList: get O(n), search O(n), insert O(1), delete O(1) (without search) 
