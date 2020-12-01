@@ -793,12 +793,82 @@ without any problem.
 - 500–599 - Server errors
 
 #### What is a API?
-Application Programming Interface.A set of functions and procedures allowing the creation of applications 
+Application Programming Interface. A set of functions and procedures allowing the creation an interface for applications 
 that access the features or data of an operating system, application, or other service.
 
 #### What is REST API?
-REST - Representational State Transfer. Software architectural style.
-With it's API directed to manage http methods for getting or sending data, payload etc.
+REST - Representational State Transfer. 
+A software architectural style to provide interoperability between computer systems on the internet and to improve
+*performance, scalability, simplicity, modifiability, visibility, portability and reliability.*
+
+- **Uniform Interface**<br>
+defines the interface between clients and servers. It simplifies and decouples the architecture, 
+which enables each part to evolve independently.
+The uniform interface that any REST services must provide is fundamental to its design.
+    - **Resource-Based**<br>
+        - resources are identified using URIs as resource identifiers. 
+        - resources are conceptually separate from the representations that are returned to the client.<br>
+            > For example, the server does not send its database, but rather, some HTML, XML or JSON 
+            (depending on the details of the request and the server implementation
+            that represents some database records expressed, 
+    - **Manipulation of Resources Through Representations**<br>
+    When a client holds a representation of a resource, including any metadata attached, 
+    it should have enough information to create, modify or delete the resource on the server, 
+    if it has permission to do so.
+    - **Self-descriptive Messages**<br>
+    Each message includes enough information to describe how to process the message. 
+        >For example, which parser to invoke may be specified by an Internet media type (previously known as a MIME type). 
+        Responses also explicitly indicate their cache-ability.
+    - **Hypermedia as the Engine of Application State (HATEOAS)**<br>
+        servers provide information dynamically through hypermedia       
+        - Clients deliver state via:
+            - body contents, 
+            - query-string parameters, 
+            - request headers and the 
+            - requested URI (the resource name).<br> 
+        
+        - Services deliver state to clients via: 
+            - body content, 
+            - response codes, and 
+            - response headers.<br> 
+
+- **Stateless**<br>
+    - URI uniquely identifies the resource and the body contains the state (or state change) of that resource. 
+    - The client must include all information for the server to fulfill the request, 
+        - as part of the URI, 
+        - query-string parameters, 
+        - request body, or header.
+
+    - Then after the server does it's processing, the appropriate state are communicated back to the client via:
+        - headers, 
+        - status and 
+        - response body.
+    - resending state as necessary if that state must span multiple requests.<br> 
+    - **Statelessness enables greater scalability** since the server does not have to maintain, update or communicate that session state. 
+        >State, or application state, is that which the server cares about to fulfill a request—data necessary for the current session or request.
+
+- **Cacheable**<br>
+Clients can cache responses. Responses must therefore, implicitly or explicitly, define themselves as cacheable, or not, 
+to prevent clients reusing stale or inappropriate data in response to further requests. 
+Well-managed caching partially or completely eliminates some client–server interactions, further improving *scalability* and *performance*.
+
+- **Client-Server**<br>
+The uniform interface separates clients from servers. 
+    - *Portability of client code is improved.*<br> 
+    clients are not concerned with resource implementation, those are remaining internal to each server<br>
+    - *servers can be simpler and more scalable.*<br> 
+    Servers are not concerned with the user interface or user state<br> 
+    - *Servers and clients may also be replaced and developed independently*, as long as the interface is not altered.
+
+- **Layered System**<br>
+    - Intermediary servers may improve system scalability by enabling load-balancing and by providing shared caches. 
+    - Layers may also enforce security policies.
+    
+- **Code on Demand** (optional)<br>
+    Servers are able to temporarily extend or customize the functionality of a client by transferring logic to it. 
+    that it can execute. Examples of this may include: 
+    - compiled components such as Java applets and 
+    - client-side scripts such as JavaScript.
 
 #### What is JSON? When to use?
 JavaScript Object Notation.
