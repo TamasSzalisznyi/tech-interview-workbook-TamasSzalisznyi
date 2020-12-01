@@ -485,25 +485,55 @@ An aggregate function performs a calculation on a set of values, and returns a s
 - COUNT(*) / COUNT(expression) - return the number of all rows / number of rows where expression true
 
 #### What kind of JOIN types do you know in SQL? Could you give examples?
-- (INNER) JOIN:
+- `(INNER) JOIN`:
     - return the corresponding values if each table have the connection point.
-- LEFT (OUTER) JOIN / RIGHT (OUTER) JOIN:
+- `LEFT (OUTER) JOIN` / `RIGHT (OUTER) JOIN`:
     - return the corresponding values if one of tables (corresponding) have the connection point
+- `CROSS JOIN` (Cartesian-join) / `FULL JOIN`:
+    - return each row from connected tables. `INNER JOIN` is a subset of `FULL JOIN`, where the `WHERE` condition is met.
     
 #### What are the constraints in sql?
-Constraints are defining what value type can accepted by the column.
+Constraints are defining what value type can accepted by the column or by a table.
+
+By column:
+- **NOT NULL** - Ensures that a column cannot have a NULL value
+- **UNIQUE** - Ensures that all values in a column are different
+- **PRIMARY KEY** - A combination of a NOT NULL and UNIQUE. Uniquely identifies each row in a table
+- **FOREIGN KEY** - Uniquely identifies a row/record in another table
+- **DEFAULT** - Sets a default value for a column when no value is specified
+
+By table:
+- **CHECK** - Ensures that all values in a column satisfies a specific condition
+- **INDEX** - Used to create and retrieve data from the database very quickly
 
 #### What is a cursor in SQL? Why would you use one?
-A cursor allows us to encapsulate a query (the string we defined with parameters), process it each individual row at a time. 
-And return with the values as a query-result. 
-We use cursors when we want to divide a large result set into parts 
-and process each part individually. 
+A cursor can be viewed as a pointer to one row in a set of rows.
+- **can only reference one row at a time** 
+- **can move to other rows of the result set as needed**
+- enables the sequential processing of rows in a result set
+- can perform complex logic on a single row
+ 
+I found a few situations for using cursor, but as I understand, it is preferred to let the DB doing the work<br>
+through the SQL queries with commands and clauses.<br>
+This is because SQL languages are procedural-declarative, and implementations from vendors are optimised and<br>
+are better in performance than using cursors.
+   
+One could use cursors:
+
+- Mostly for database administration tasks like:
+    - **backups**, 
+    - **integrity checks**, 
+    - **rebuilding indexes**
+- For one-time tasks when you’re sure that possible poor performance won’t impact the overall system performance
+- Calling a stored procedure a few times using different parameters.<br>
+ In that case, you would get parameters from cursor variables and make calls inside the loop
 
 #### What are database indexes? When to use?
-To faster reach of a database table values, we can create an index.
-The index containing a field value and point to the row which hold the column.
-Index is sorted and acting like a placeholder to a faster search:
-no need the look up all the columns in the rows for the data.
+To faster reach of a row from a database's table, we can create an index.<br>
+The index containing a field value and point to the row which hold the column.<br>
+Creating an index on a field in a table creates another data structure<br> 
+which holds the field value, and a pointer to the record it relates to.<br> 
+This index structure is then sorted, allowing Binary Searches to be performed on it.
 
 #### What are database transactions? When to use?
 A transaction is a single unit of logic or work. According to the 
@@ -521,48 +551,104 @@ Table connection defined by keys, which are representing the connection between 
     - if more than one table key pointing to more than one table keys. For that is needed an intersection table who is controlling
 the connection between the relations.
 
-#### You have a table with an “address” field which contains data like “3525, Miskolc, Régiposta 9.” (postcode, city, street name and address). How would you query all records related to Miskolc?
-`SELECT * FROM table WHERE city = 'Miskolc'`
+#### You have a table with an “address” field which contains data like “3525, Miskolc, Régiposta 9.” (postcode, city, street name and address). 
+#### How would you query all records related to Miskolc?
+```postgresql
+ SELECT * 
+ FROM address_table 
+ WHERE city 
+ LIKE = '%Miskolc%';
+```
 
 #### How would you keep track of what kind of data has changed after an UPDATE or DELETE operation in a table?
 With the `RETURNING` keyword at the end of the query string as a readable noteback from the operation.
+
+```postgresql
+INSERT INTO a_table 
+        (column_1, column_2, column_n)
+VALUES ('value_1', 'value_2', 'value_n')
+RETURNING column_x;
+```
 
 ### HTML & CSS
 
 #### What’s the difference between XML, XHTML and HTML?
 XML --- eXtensible Markup Language
-XHTML - eXtesnsible Hypertext Markup Language
+XHTML - eXtensible Hypertext Markup Language
 HTML -- Hypertext Markup Language
 SGML -- Standard Generalized Markup Language
 
-HTML is SGML based, developed to parse data written in a serialized language (tags are predefined) and display it from the point of user or UI. 
+**HTML** is SGML (Standard Generalized Markup Language) based,<br> 
+developed to parse data written in a serialized language (tags are predefined) and<br> 
+display it from the point of user or UI.<br> 
 Media or object can also be a part of the document.
 
-XML is mostly for parsing data and transfer it between sites or to communicate different applications with each other.
-Tags are not predefined and strict in closing tags but not in case. 
+**XML** is mostly for parsing data and transfer it between sites or to communicate different applications with each other.<br>
+Tags are not predefined, strict in closing tags, case insensitive. 
 
-XHTML is XML based, composing the two other attributes. Parsed as an HTML document but allowing XML specifications. 
+**XHTML** is XML based, composing the two other attributes.<br> 
+Parsed as an HTML document but allowing XML specifications. 
 
 #### How to include a JavaScript file in a web page?
-Between a ```script``` tag, along with the ```type```, ```rel``` and ```src``` attributes.
+Between a `script` tag, between the header tags, along with the `type`, `rel` and `src` attributes.
 
 #### How to include a CSS file in a web page?
-Between a ```link``` tag, along with the ```type```, ```rel``` and ```src``` attributes.
+Inline - by using the `style` attribute inside any HTML elements opening tag followed by CSS properties.
+
+Internal - by using a `<style>` element in the <head> section followed by the `type`, `rel` and `src` attributes.<br>
+
+External - by using a `<link>` element to link to an external CSS file followed by the `type`, `rel` and `src` attributes.
 
 #### How to select an element using its id in CSS?
-With selectors. Selectors can be ```tag_name {}```, ```.class_name {}``` and ```#id_name {}```.
+Syntax: `#id`
+```css
+#bob {
+ text-transform: uppercase;
+}
+```
+```html
+<div class="people" id="bob">Bob</div>
+```
 
 #### How to select elements using their class in CSS?
-```.class_name {}```
+Syntax: `.class-name`
+````css
+.people {
+    background-color: white;
+}
+````
+```html
+<div class="people" id="bob">Bob</div>
+```
 
 #### How to select elements which have the ‘alpha’ and ‘beta’ classes in CSS?
-With chaining the class selectors: `.alpha.beta {}`
+With chaining the class selectors:
+ ```css
+.alpha.beta {
+    background-color: darkblue;
+}
+```
 
 #### How to select all list items in all ordered lists on the page in CSS?
-```ol > li {}```
+```css
+ol > li {
+    padding: inherit;
+}
+```
 
 #### How to select elements using their attributes in CSS?
-Square brackets for the attributes with the element selector. E.g.: `selector[attribute_name] {}`
+Square brackets for the attribute, optionally with the element selector and attribute value.<br> 
+Syntax: `selector[attribute[[~|^*]=value] { css_property: value }` <br>
+`~|^*` are wildcards for containing, starting, begins with and value contains. <br>
+
+```html
+<input type="checkbox" role="button" id="checkbox_one" class="top sample">
+```
+```css
+#checkbox_one[role=button] {
+    color: coral;
+}
+```
 
 #### What are UX and UI?
 User Experience and User Interface.
@@ -603,20 +689,30 @@ User Experience and User Interface.
 ### Javascript
 
 #### What is javascript?
-JS is a scripting language designed to control web page content.
+JS is a scripting language designed to control web page content.<br>
+Event-driven, functional, imperative and dynamic typed multi-paradigm scripting language.
 
 #### When to use AJAX? Bring examples of its usage.
-AJAX - Asynchronous Javascript and XML
-Using asynchronous data transfer for operations to be done without reloading the whole page, operating just with he target content. 
-E.g.: loading and displaying some data part in a table and those rest part in a separate place or in a new modal without touching 
-the previous element or reload the page.
+AJAX - Asynchronous Javascript and XML<br>
+Using asynchronous data transfer for operations to be done without reloading the whole page,<br> 
+operating just with he target content. 
+
+Usage: A modern web page may use a lot of different components. The load time may take significant amount of time.<br>
+For a better UX the web page should not wait for load in all the parts together then displaying it's final content and,<br>
+render it as a whole and repeat it after every interaction with the user,<br> 
+instead the different parts can be loaded parallel; *asynchronously* and let be displayed immediately at the time<br> 
+when the individual parts finished with loading.  
 
 #### What is DOM and how to manipulate it from Javascript?
 DOM - Document Object Model
-DOM is representative displaying for the according html document, and those objects can modified.
-- Creating, removing or replacing an element 
-- Modifying an element's text and/or HTML content
-- Get an element content and work with it
+- the data representation of the objects that comprise the structure and content of a document on the web.<br>  
+- a programming interface for HTML and XML documents.<br> 
+- it represents the page so that programs can change the document structure, style, and content. 
+- a web page is a document, and the DOM represents the document as nodes and objects.<br> 
+That way, programming languages can connect to the page.
+    - Creating, removing or replacing an element 
+- DOM is an object-oriented representation of the web page, which can be modified with a scripting language such as JavaScript.
+- JS modify the DOM with scripts, these scripts are linked with the `<script>` tags in the HTML `<head>` section.
 
 #### What are events and how/why to use them in Javascript?
 JavaScript's interaction with HTML is handled through events that occur when the user or the browser manipulates a page.
@@ -624,9 +720,28 @@ With event listeners to catch them and with event handlers to react for them.
 Using for make a site interactive, informative or any other UX, UI purpose.
 
 #### What is event bubbling/capturing? How would you use it?
-They are the direction of the execution on a node tree. Determine the action starting object and the direction it flow through.
-<br><b>Capturing</b> when an event should be handled on the target ancestors first, then come the target node. 
-<br><b>B>ubbling</b> is opposite, the target node is the first object, then comes the parents.
+They are the direction of the execution on a node tree.<br> 
+Determine the action starting object and the direction it flow through.<br> 
+
+**Capturing**<br>
+```javascript
+elem.addEventListener(..., {capture: true})
+``` 
+The browser checks to see if the element's outer-most ancestor has an onclick event handler<br> 
+registered on it for the capturing phase, and runs it if so.<br>
+Then it moves on to the next element and does the same thing, then the next one,<br> 
+and so on until it reaches the element that was actually selected.
+
+**Bubbling**<br> When an event happens on an element, it first runs the handlers on it,<br> 
+then on its parent, then all the way up on other ancestors.
+```html
+<form onclick="alert('form')">FORM
+    <div onclick="alert('div')">DIV
+        <p onclick="alert('p')">P</p>
+    </div>
+</form>
+```
+The alert message will be: "p", "div" and "form".
 
 #### What is JSON and how do we use it?
 JSON format is used for serializing and transmitting structured data over a network connection. 
@@ -656,7 +771,7 @@ With the pull request, as inviting the other members to review the developed bra
 `git status` I like see the result.
 
 #### What does remote/local mean in Git? 
-Remote exists on the git server. Local files are the copy of them on my disk.
+Remote exists on the git server. Local files are the origin or the copy of them on my disk.
 
 ### DevOps
 
