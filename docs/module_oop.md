@@ -23,13 +23,14 @@ Other approach should be using two pointer: one slower pointer who step one, and
 If the faster pointer reach the last element, the slower one should be on the middle.
     
 #### Given an array of integers going from 1 to 100 (both inclusive) there is a duplicated entry. How to find it?
-Store the first element in a temporary variable then iterating over the array, if there is no match, 
-begin the process with the second element and so on till an equality comparison return true.
+Creating an empty Set. Then iterating over the array and examine each element from the array before put the new element 
+into the Set with a comparison between the Set's elements and the nem element. 
+If the element already present then we have the duplicate.
     
 #### What is a linked list? How to find if a linked list has a loop?
 Linked list is a data structure which hold the values in a field and a pointer to the next element 
 (and optionally a pointer to the previous).
-Floyds cycle say: 
+Floyd's cycle say: 
 starting with two pointers, one is faster than the other, if they met, there is a loop in the list.
     
 #### What is the Big O time complexity of the common operations in an ArrayList, LinkedList, HashMap? And of a bubble sort, quicksort, finding items in a Binary Search tree?
