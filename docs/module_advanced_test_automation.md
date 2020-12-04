@@ -36,23 +36,23 @@ If the part of the code containing the defect, is executed, or the environment c
 *dynamic test can find them*
 
 #### What are the testing principles?
-1. Testing shows the presence of defects, not their absence.
-2. Exhaustive is impossible. 
->By risk analysis and test techniques focus the test effort.
-3. Shift left 
->Join the testing process early in the software development lifecycle to save time and money.<br> 
->Early testing with static techniques can save time and energy with preventing bugs.
-4. Defects cluster together. 80%-20% rule. <br>
->Pareto principle, 80-20 rule. The majority of the defects (80%) clustered and caused by a few modules (20%).<br>
-5. Pesticide Paradox. 
->Executing the same test does not find more defect. <br>
-> Except regression test. Regression test has a beneficial outcome to execute over and over.
-6. Testing is context dependent. 
->There is no universal test design pattern.<br>
->Every product ahs different contextual need.
-7. Absence-of-errors is a fallacy. 
->Good tests are not guarantee for a successful or flawless product.<br> 
->Test can verify and validate the product but isn't a guarantee that design and acceptance meet with users needs. 
+ 1. Testing shows the presence of defects, not their absence.
+ 2. Exhaustive is impossible. 
+    >By risk analysis and test techniques focus the test effort.
+ 3. Shift left 
+    >Join the testing process early in the software development lifecycle to save time and money.<br> 
+    >Early testing with static techniques can save time and energy with preventing bugs.
+ 4. Defects cluster together. 80%-20% rule. <br>
+    >Pareto's principle, 80-20 rule. The majority of the defects (80%) clustered and caused by a few modules (20%).<br>
+ 5. Pesticide Paradox. 
+    >Executing the same test does not find more defect. <br>
+    > Except regression test. Regression test has a beneficial outcome to execute over and over.
+ 6. Testing is context dependent. 
+    >There is no universal test design pattern.<br>
+    >Every product ahs different contextual need.
+ 7. Absence-of-errors is a fallacy. 
+    >Good tests are not guarantee for a successful or flawless product.<br> 
+    >Test can verify and validate the product but isn't a guarantee that design and acceptance meet with users needs. 
 
 #### What is unit testing? Who is responsible to write unit tests?
 Unit test cover a piece of code. A function or a method. <br>
@@ -84,7 +84,7 @@ Performed on a complete, integrated system.<br>
 Like system testing, typically focuses on the behavior and capabilities of a whole system or product.<br>
     - Usually done by the user, customer or stakeholders, manually. (UAT: User acceptance testing)
     - Establishing confidence in the quality of the system as a whole
-    - Validating that the system is complete and will work as expected
+    - Validating the system is complete and will work as expected
     - May produce information to assess the system’s readiness for deployment
     - Should produce information user experience by the customer (end-user). 
     - Finding a significant number of defects during acceptance test may considered a major project risk.
@@ -155,7 +155,7 @@ and to identify areas that need more attention.
 - Analyzing product risks early contributes to the success of a project.
 
 >A risk calculation example:<br>
->After analyzing the **probability of occurrence** and the **impact possible damage** in <br>
+>After analyzing the **probability of occurrence**, and the **impact possible damage** in <br>
 > money / time / human life loss<br>
 >given two number from a scale from 1 to 5.<br>
 >Multiplying this two number can be a risk factor.
@@ -240,7 +240,7 @@ This section explains the functions/modules in scope & out of scope for testing.
 >    - what were the outcome
 
 >Out of scope:
->   - objectives neing not tested
+>   - objectives being not tested
 >   - reason
 
 >Not tested:
@@ -409,7 +409,7 @@ Also make possible to write scenarios without programming skills and make test c
 Well structured architecture make tests more readable and maintainable.
 
 #### What is API testing and why would you use that?
-API testing is a type of software testing APIs involved directly to verify product *functionality, reliability,<br> 
+API testing is a type of software testing APIs involved directly to verify a product *functionality, reliability,<br> 
 performance, and security*. Since APIs lack of GUI, API testing is performed at the message layer on a higher speed.
 
 **Earlier Testing** - Increased Development Progress<br>
@@ -451,7 +451,7 @@ Best practice: in case of locating with xpath, the xpath should not be the full 
     /html/body/div[7]/div[2]/div[10]/div[1]/div[2]/div/div[2]/div[2]/div/div/div[2]/div/div[1]/a/h3/button
 `
 
-but, should use a relative xpath like:
+instead, should use a relative xpath like:
 
 `
     //button[contains(@class, ‘classname’)]
@@ -461,8 +461,8 @@ but, should use a relative xpath like:
 Huge scale of products on market which are very different in performance, resolution and OS, therefore may need test script<br> 
 which able to locate and process result dynamically or may need a solution to execute more test case parallel to save time.
 
-Android: million different device, easy testable OS.<br>
-Apple: closed iOS, difficult to test, relative few device.
+Android: a million different device, easy testable OS.<br>
+Apple: closed iOS, difficult to test, relative few devices.
 
 ### Advanced Topics
 
