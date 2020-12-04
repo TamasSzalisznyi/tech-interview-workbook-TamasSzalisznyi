@@ -42,18 +42,18 @@ If the part of the code containing the defect, is executed, or the environment c
     >By risk analysis and test techniques focus the test effort.
  3. Shift left 
     >Join the testing process early in the software development lifecycle to save time and money.<br> 
-    >Early testing with static techniques can save time and energy with preventing bugs.
+    Early testing with static techniques can save time and energy with preventing bugs.
  4. Defects cluster together. 80%-20% rule. <br>
     >Pareto's principle, 80-20 rule. The majority of the defects (80%) clustered and caused by a few modules (20%).<br>
  5. Pesticide Paradox. 
     >Executing the same test does not find more defect. <br>
-    > Except regression test. Regression test has a beneficial outcome to execute over and over.
+    Except regression test. Regression test has a beneficial outcome to execute over and over.
  6. Testing is context dependent. 
     >There is no universal test design pattern.<br>
-    >Every product ahs different contextual need.
+    Every product ahs different contextual need.
  7. Absence-of-errors is a fallacy. 
     >Good tests are not guarantee for a successful or flawless product.<br> 
-    >Test can verify and validate the product but isn't a guarantee that design and acceptance meet with users needs. 
+    Test can verify and validate the product but isn't a guarantee that design and acceptance meet with users needs. 
 
 #### What is unit testing? Who is responsible to write unit tests?
 Unit test cover a piece of code. A function or a method. <br>
