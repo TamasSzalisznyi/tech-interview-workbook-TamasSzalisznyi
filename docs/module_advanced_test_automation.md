@@ -11,6 +11,7 @@ Testing process aiming:
  - to verify the system meets with specified requirements.
 
 Test process would not:
+- fix the issue in case a bug found
 - prove that the software working well under every circumstance, 
 - prove that the product is bug and failure free
 - validate that the product meets with user needs (but can suggest some hints).
