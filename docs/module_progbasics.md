@@ -470,32 +470,32 @@ With changing directories;
 `$ <command> --help` or `$ man <command>`
 
 #### What does the following commands do: head, tail, more, less?
-1. ```more <filename>``` : to view a text file one page at a time
+1. ```more <filename>```  to view a text file one page at a time
 >    * **```$ more <-num> <filename>```** : show the document page few lines as specified by ```-num```
 
-2. ```$ less``` : similar to ```$ more``` command
+2. ```$ less```  similar to ```$ more``` command
     * can navigate the page up/down
     * can search a string in less command. (use /```$ keywordto``` search)
 
 >    * **```$ less <filename>```**
 
-3. ```$ head``` : displays the first ten lines of a file, unless otherwise stated.
->    * **```$ head <myfile.txt>```** : Would display the first ten lines of ```myfile.txt```
-* ```$ head <-num> <myfile.txt>``` : Would display the first ```<num>``` lines of ```myfile.txt```
+3. ```$ head```  displays the first ten lines of a file, unless otherwise stated.
+>    * **```$ head <myfile.txt>```**  Would display the first ten lines of ```myfile.txt```
+* ```$ head <-num> <myfile.txt>```  Would display the first ```<num>``` lines of ```myfile.txt```
 
-4. ```$ tail``` : display the last part of the file
+4. ```$ tail```  display the last part of the file
 
     * ```$ tail <filename>```
-    >    * **```$ tail -n <filename>```** : display the last n lines of the file
+    >    * **```$ tail -n <filename>```**  display the last n lines of the file
 
->5. **```$ cat```** : can be used to join multiple files together and/or print the result on screen
+>5. **```$ cat```** can be used to join multiple files together and/or print the result on screen
     
-* **```$ cat 01.txt ```** : display the contents of ```file 01.txt```
-    * **```$ cat 01.txt 02.txt```** : display the contents of both files
-    * **```$ cat file1.txt file2.txt > file3.txt```** : Reads ```file1.txt``` and ```file2.txt``` and  <br>
+* **```$ cat 01.txt ```**  display the contents of ```file 01.txt```
+    * **```$ cat 01.txt 02.txt```**  display the contents of both files
+    * **```$ cat file1.txt file2.txt > file3.txt```**  Reads ```file1.txt``` and ```file2.txt``` and  <br>
     combines those files to make ```file3.txt```
-    * **```$ cat note5 >> notes```** : attach ```note5``` to ```notes```
-    * **```$ cat > file1 ```** : add additional data in ```file1```
+    * **```$ cat note5 >> notes```**  attach ```note5``` to ```notes```
+    * **```$ cat > file1 ```**  add additional data in ```file1```
 
 #### How do you download a file from internet using the terminal?
 ```$ wget (-o)``` or ```$ curl (-o)``` for further information, ```$ man wget``` or ```$ man curl```
